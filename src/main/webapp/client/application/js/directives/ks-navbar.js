@@ -18,6 +18,7 @@
     	var vm = this;
     	vm.goToHome = goToHome;
         vm.goToLogin = goToLogin;
+        vm.discover = discover;
         vm.goToRegister = goToRegister;
         vm.isAuthorized = isAuthorized;
         vm.signOut = signOut;
@@ -31,6 +32,10 @@
 
         function goToLogin(){
             $state.go(appStates.LOGIN);
+        }
+
+        function discover() {
+            $state.go(appStates.DISCOVER);
         }
 
         function goToRegister(){

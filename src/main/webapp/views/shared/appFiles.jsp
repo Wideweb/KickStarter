@@ -54,6 +54,12 @@
     <spring:url value="/client/application/js/controllers/ProjectController.js" var="appProjectControllerJs" />
     <script src="${appProjectControllerJs}"></script>
 
+    <spring:url value="/client/application/js/controllers/DiscoverController.js" var="appDiscoverControllerJs" />
+    <script src="${appDiscoverControllerJs}"></script>
+
+    <spring:url value="/client/application/js/controllers/ProjectsByCategoryController.js" var="appProjectsByCategoryControllerJs" />
+    <script src="${appProjectsByCategoryControllerJs}"></script>
+
     <spring:url value="/client/application/js/directives/custom-forms.js" var="appCustomFormsDirectiveJs" />
     <script src="${appCustomFormsDirectiveJs}"></script>
 
@@ -89,3 +95,6 @@
 
     <spring:url value="/client/application/js/services/documentService.js" var="appDocumentServiceJs" />
     <script src="${appDocumentServiceJs}"></script>
+
+    <spring:url value="/client/application/js/services/categoryService.js" var="appCategoryServiceJs" />
+    <script src="${appCategoryServiceJs}"></script>

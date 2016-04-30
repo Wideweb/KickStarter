@@ -17,7 +17,6 @@
         function getProject(projectId) {
             projectService.getProject(projectId)
                 .then(function (res) {
-                    console.log(res.data);
                     $scope.project = res.data;
                 })
                 .catch(function (err) {

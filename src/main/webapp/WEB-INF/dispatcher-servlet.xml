@@ -104,4 +104,6 @@
     <bean id="lookupService" class="com.kickstarter.logic.services.LookupService"/>
 
     <bean id="projectService" class="com.kickstarter.logic.services.ProjectService"/>
+
+    <bean id="projectTypeService" class="com.kickstarter.logic.services.ProjectTypeService"/>
 </beans>
