@@ -34,6 +34,7 @@
 
         function onProjectsReceived(response){
             vm.projects = response.data;
+            console.log(response.data)
         }
 
         function onRequestFailed(error){
