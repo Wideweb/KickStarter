@@ -18,14 +18,14 @@
                 <ul class="list-inline">
                     <li>
                         <div class="info" style="left: 5%;">
-                            <span class="value">{{ project.pleged / project.fundingGoal }}%</span>
+                            <span class="value">{{ (project.pledged / project.fundingGoal)| number:2 }}%</span>
                             <span class="annotation">funded</span>
                         </div>
                     </li>
                     <li>
                         <div class="info" style="left: 38%">
-                            <span class="value">{{ project.pleged }}</span>
-                            <span class="annotation">pleged</span>
+                            <span class="value">{{ project.pledged }}</span>
+                            <span class="annotation">pledged</span>
                         </div>
                     </li>
                     <li>
