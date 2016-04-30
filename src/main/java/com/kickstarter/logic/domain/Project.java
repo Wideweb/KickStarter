@@ -12,6 +12,9 @@ public class Project extends EntityBase {
     private Integer fundingGoal;
     private Integer fundingDuration;
 
+    private Integer pledged;
+    private Integer daysToGo;
+
     public String getName() {
         return name;
     }
@@ -74,5 +77,15 @@ public class Project extends EntityBase {
 
     public void setFundingDuration(Integer fundingDuration) {
         this.fundingDuration = fundingDuration;
+    }
+
+    public Integer getDaysToGo() {
+        long diff = new Date().getTime() - getStartDate().getTime();
+        int daysToGo = getFundingDuration() - (int)diff / (24 * 60 * 60 * 1000);
+        return daysToGo;
+    }
+
+    public Integer getPledged() {
+        return 36;
     }
 }

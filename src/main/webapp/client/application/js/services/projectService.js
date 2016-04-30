@@ -10,8 +10,9 @@
             saveProject: saveProject,
             getProject: getProject,
             getUserProjects: getUserProjects,
-            getAll: getAll
-        }
+            getAll: getAll,
+            getAllByCategory: getAllByCategory,
+        };
 
         function saveProject(project){
             return $http.post(urls.PROJECT_SAVE, project);
@@ -31,6 +32,10 @@
 
         function getAll(){
             return $http.get(urls.PROJECTS_GET_ALL);
+        }
+
+        function getAllByCategory(categoryId) {
+            return $http.get(urls.PROJECTS_BY_CATEGORY + categoryId);
         }
     }
 })();

@@ -61,7 +61,18 @@
                         url: "/project/:projectId",
                         templateUrl: appSettings.pagesFolderPath + "project.html",
                         controller: "ProjectController"
-                    });
+                    })
+                    .state(appStates.PROJECTS_BY_CATEGORY, {
+                        url: "/projects/:categoryId",
+                        templateUrl: appSettings.pagesFolderPath + "main.html",
+                        controllerAs: "vm",
+                        controller: "ProjectsByCategoryController"
+                    })
+                    .state(appStates.DISCOVER, {
+                    url: "/discover",
+                    templateUrl: appSettings.pagesFolderPath + "discover.html",
+                    controller: "DiscoverController"
+                });
             }
         ]);
 })();

@@ -11,6 +11,8 @@
         CREATE_PROJECT: "create-project",
         USER_PROJECT_LIST: "user-project-list",
         PROJECT: "project",
+        DISCOVER: "discover",
+        PROJECTS_BY_CATEGORY: "projectsByCategory"
     };
 
     angular.module("app.constants")

@@ -49,4 +49,12 @@ public class ProjectController {
         return CustomJsonResult.TryGetJsonResult(() ->
                 projectService.getAll());
     }
+
+    @RequestMapping(value = "getAll/{categoryId}", method = RequestMethod.GET)
+    public
+    @ResponseBody
+    CustomJsonResult GetAllByCategory(HttpServletRequest request, @PathVariable(value="categoryId") Integer id) {
+        return CustomJsonResult.TryGetJsonResult(() ->
+                projectService.getAllByCategory(id));
+    }
 }

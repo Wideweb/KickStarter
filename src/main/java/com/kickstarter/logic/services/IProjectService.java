@@ -11,4 +11,5 @@ public interface IProjectService {
     ProjectModel get(Integer projectId);
     List<Project> getUserProjects(String userName);
     List<Project> getAll();
+    List<Project> getAllByCategory(Integer categoryId);
 }
