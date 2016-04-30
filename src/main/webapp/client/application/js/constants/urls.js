@@ -13,7 +13,8 @@
         ACCOUNT_LOGIN: serverPath + 'account/login',
         ACCOUNT_LOGOFF: serverPath + 'account/logoff',
         USER_PROJECTS:  serverPath + 'project/getUserProjects',
-    }
+        DOWNLOAD_PROJECT_PDF: serverPath + 'document/downloadProjectPDF/',
+    };
 
     angular.module("app.constants")
         .constant("urls", URLS);

@@ -86,3 +86,6 @@
 
     <spring:url value="/client/application/js/services/router.js" var="appRouterServiceJs" />
     <script src="${appRouterServiceJs}"></script>
+
+    <spring:url value="/client/application/js/services/documentService.js" var="appDocumentServiceJs" />
+    <script src="${appDocumentServiceJs}"></script>

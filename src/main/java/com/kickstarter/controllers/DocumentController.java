@@ -3,9 +3,7 @@ package com.kickstarter.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.kickstarter.logic.domain.Project;
 import com.kickstarter.logic.services.IProjectService;
-import com.kickstarter.logic.services.ProjectService;
 import com.kickstarter.models.ProjectModel;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;

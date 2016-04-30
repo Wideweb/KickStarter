@@ -4,10 +4,10 @@
     angular
         .module('app')
         .controller("ProjectController",
-            ["projectService", "$state", "$scope", ProjectController]);
+            ["projectService", "documentService", "$state", "$scope", ProjectController]);
 
 
-    function ProjectController(projectService, $state, $scope) {
+    function ProjectController(projectService, documentService, $state, $scope) {
         $scope.project = {};
         $scope.serverError = "";
 
@@ -23,6 +23,10 @@
                 .catch(function (err) {
                     $scope.serverError = err.statusText;
                 })
+        }
+
+        $scope.downloadProjectPDF = function(projectId) {
+            documentService.downloadProjectPDF(projectId);
         }
     }
 })();
