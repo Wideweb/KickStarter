@@ -5,6 +5,7 @@ import com.kickstarter.logic.domain.*;
 import com.kickstarter.models.ProjectModel;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,6 +30,10 @@ public class ProjectService implements IProjectService {
         project.setOwner(userService.getUserByName(userName));
         project.setCountry(countryRepository.getById(projectModel.getCountryId()));
         project.setProjectType(projectTypeRepository.getById(projectModel.getProjectTypeId()));
+        project.setDescription(projectModel.getDescription());
+        project.setFundingDuration(projectModel.getFundingDuration());
+        project.setFundingGoal(projectModel.getFundingGoal());
+        project.setStartDate(new Date());
 
         if(projectModel.getId() != null && projectModel.getId() > 0){
             projectRepository.update(project);
@@ -41,11 +46,20 @@ public class ProjectService implements IProjectService {
 
     public ProjectModel get(Integer projectId){
         Project project = projectRepository.getById(projectId);
+        long diff = new Date().getTime() - project.getStartDate().getTime();
+        int daysToGo = project.getFundingDuration() - (int)diff / (24 * 60 * 60 * 1000);
         ProjectModel projectModel = new ProjectModel();
         projectModel.setId(project.getId());
         projectModel.setName(project.getName());
+        projectModel.setOwner(project.getOwner().getUsername());
         projectModel.setCountryId(project.getCountry().getId());
         projectModel.setProjectTypeId(project.getProjectType().getId());
+        projectModel.setDescription(project.getDescription());
+        projectModel.setDaysToGo(daysToGo);
+        projectModel.setBackers(0);
+        projectModel.setPledged(0);
+        projectModel.setFundingGoal(project.getFundingGoal());
+        projectModel.setFundingDuration(project.getFundingDuration());
 
         return projectModel;
     }

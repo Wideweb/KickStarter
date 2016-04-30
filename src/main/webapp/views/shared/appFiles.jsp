@@ -51,6 +51,9 @@
     <spring:url value="/client/application/js/controllers/UserProjectListController.js" var="appUserProjectListControllerJs" />
     <script src="${appUserProjectListControllerJs}"></script>
 
+    <spring:url value="/client/application/js/controllers/ProjectController.js" var="appProjectControllerJs" />
+    <script src="${appProjectControllerJs}"></script>
+
     <spring:url value="/client/application/js/directives/custom-forms.js" var="appCustomFormsDirectiveJs" />
     <script src="${appCustomFormsDirectiveJs}"></script>
 

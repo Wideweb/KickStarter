@@ -11,6 +11,8 @@
     <div>
       <div ui-view></div>
     </div>
+    <h3><a href="/downloadPDF">Download PDF Document</a></h3>
+    <h3><a href="/downloadExcel">Download Excel Document</a></h3>
   </body>
 <jsp:include page="shared/componentsFiles.jsp"/>
 <jsp:include page="shared/appFiles.jsp"/>

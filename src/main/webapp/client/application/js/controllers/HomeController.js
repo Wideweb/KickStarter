@@ -4,16 +4,17 @@
     angular
         .module('app')
         .controller("HomeController", 
-            ["urls", "projectService", HomeController]);
+            ["urls", "projectService", "appStates", HomeController]);
             
 
-    function HomeController(urls, projectService) {
+    function HomeController(urls, projectService, appStates) {
         var vm = this;
         var projectListReceived = false;
 
         vm.urls = urls;
         vm.projects = {};
         vm.serverError = '';
+        vm.states = appStates;
         vm.hasProjects = hasProjects;
 
         activate();

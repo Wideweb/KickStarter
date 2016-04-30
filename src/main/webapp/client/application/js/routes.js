@@ -57,6 +57,11 @@
                             authenticate: true
                         }
                     })
+                    .state(appStates.PROJECT, {
+                        url: "/project/:projectId",
+                        templateUrl: appSettings.pagesFolderPath + "project.html",
+                        controller: "ProjectController"
+                    })
                     .state(appStates.DONATE_TO_PROJECT, {
                         url: "/donate-to-project",
                         templateUrl: appSettings.pagesFolderPath + "donate-to-project.html",

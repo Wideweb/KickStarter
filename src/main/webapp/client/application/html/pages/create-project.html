@@ -38,6 +38,45 @@
                 </div>
             </div>
             <div class="form-group"
+                 ng-class="{ 'has-error': vm.projectForm.description.$touched && vm.projectForm.description.$invalid }">
+                <div class="flex-container">
+                    <label for="description">Description:</label>
+                    <textarea class="form-control"
+                              style="height: auto;"
+                              rows="5"
+                              id="description"
+                              name="description"
+                              required
+                              ng-model="vm.project.description"
+                    ></textarea>
+                </div>
+            </div>
+            <div class="form-inline">
+                <div class="form-group"
+                     ng-class="{ 'has-error': vm.projectForm.fundingDuration.$touched && vm.projectForm.fundingDuration.$invalid }">
+                    <label for="fundingDuration">Funding Duration:</label>
+                    <input placeholder="Days"
+                           id="fundingDuration"
+                           name="fundingDuration"
+                           required
+                           class="form-control"
+                           ng-model="vm.project.fundingDuration"/>
+                </div>
+                <div class="form-group"
+                     ng-class="{ 'has-error': vm.projectForm.fundingGoal.$touched && vm.projectForm.fundingGoal.$invalid }">
+                    <label for="fundingDuration">Funding Goal:</label>
+                    <div class="input-group">
+                        <input placeholder=""
+                               id="fundingGoal"
+                               name="fundingGoal"
+                               required
+                               class="form-control"
+                               ng-model="vm.project.fundingGoal"/>
+                        <div class="input-group-addon">$</div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group"
                  ng-class="{ 'has-error': vm.projectForm.country.$touched && vm.projectForm.country.$invalid }">
                 <div class="flex-container">
                     <div class="col-sm-4 col-sm-offset-1 col-xs-5">
@@ -49,7 +88,9 @@
                                 item-source-url="{{ vm.urls.COUNTRY_LOOKUPS }}">
                         </ks-autocomplete>
                         <p class="creation-location-info">
-                            * Project creation is currently open to creators in Austria, Australia, Belgium, Canada, Switzerland, Germany, Denmark, Spain, France, the United Kingdom, Ireland, Italy, Luxembourg, the Netherlands, Norway, New Zealand, Sweden, and the United States
+                            * Project creation is currently open to creators in Austria, Australia, Belgium, Canada,
+                            Switzerland, Germany, Denmark, Spain, France, the United Kingdom, Ireland, Italy,
+                            Luxembourg, the Netherlands, Norway, New Zealand, Sweden, and the United States
                         </p>
                     </div>
                     <div class="col-sm-7 col-xs-6">
@@ -57,7 +98,8 @@
                                 type="Submit"
                                 ng-disabled="vm.isSubmitting"
                                 ng-click="vm.save()"
-                                translate>START</button>
+                                translate>START
+                        </button>
                     </div>
                 </div>
             </div>

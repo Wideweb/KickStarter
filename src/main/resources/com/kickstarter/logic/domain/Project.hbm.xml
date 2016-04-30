@@ -9,16 +9,28 @@
             <generator class="identity"/>
         </id>
         <property name="name" type="java.lang.String">
-            <column name="Name" not-null="true"/>
+            <column name="name" not-null="true"/>
+        </property>
+        <property name="description" type="java.lang.String">
+            <column name="description" not-null="true" sql-type="text" />
+        </property>
+        <property name="startDate" type="java.util.Date">
+            <column name="start_date" not-null="true" />
+        </property>
+        <property name="fundingGoal" type="java.lang.Integer">
+            <column name="funding_goal" not-null="true" />
+        </property>
+        <property name="fundingDuration" type="java.lang.Integer">
+            <column name="funding_duration" not-null="true" default="30" />
         </property>
         <many-to-one name="projectType" class="com.kickstarter.logic.domain.ProjectType" fetch="join">
-            <column name="ProjectTypeId" not-null="true"/>
+            <column name="project_type_id" not-null="true"/>
         </many-to-one>
         <many-to-one name="country" class="com.kickstarter.logic.domain.Country" fetch="join">
-            <column name="CountryId" not-null="true"/>
+            <column name="country_id" not-null="true"/>
         </many-to-one>
         <many-to-one name="owner" class="com.kickstarter.logic.domain.User" fetch="join">
-            <column name="Owner" not-null="true"/>
+            <column name="owner" not-null="true"/>
         </many-to-one>
     </class>
 </hibernate-mapping>

@@ -9,7 +9,9 @@
     </div>
     <div ng-if="vm.hasProjects()" class="row">
         <div ng-repeat="project in vm.projects track by project.id">
-            <span>{{$index + 1}}. {{ project.name }} - {{ project.projectType.name }} - {{ project.country.name }} </span>
+            <span><a ui-sref="{{ vm.states.PROJECT }}({ projectId: project.id })">
+                {{$index + 1}}. {{ project.name }} - {{ project.projectType.name }} - {{ project.country.name }}
+            </a></span>
         </div>
     </div>
 </div>
