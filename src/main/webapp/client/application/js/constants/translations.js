@@ -19,7 +19,8 @@
         REQUESTED_PAGE_WAS_NOT_FOUND: 'Requested page was not found',
         YOUR_PROJECTS: 'Your projects',
         YOU_DO_NOT_HAVE_PROJECTS: "You don't have any projects yet",
-        THERE_ARE_NO_PROJECTS_IN_THE_SYSTEM: "There are no projects in the system"
+        THERE_ARE_NO_PROJECTS_IN_THE_SYSTEM: "There are no projects in the system",
+        ARE_YOU_SURE_YOU_WANT_TO_DOANTE_TO_PROJECT: "Are you sure you want to donate {{ amount }} to {{ projectName }}",
     };
 
     angular

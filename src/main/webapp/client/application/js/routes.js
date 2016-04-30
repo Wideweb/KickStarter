@@ -56,6 +56,15 @@
                         data:{
                             authenticate: true
                         }
+                    })
+                    .state(appStates.DONATE_TO_PROJECT, {
+                        url: "/donate-to-project",
+                        templateUrl: appSettings.pagesFolderPath + "donate-to-project.html",
+                        controller: "DonateToProjectController",
+                        controllerAs: "vm",
+                        data:{
+                            authenticate: true
+                        }
                     });
             }
         ]);
