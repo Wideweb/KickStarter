@@ -1,21 +1,27 @@
-angular.module('app').filter('truncate', truncate);
+(function(){
+    "use strict";
 
-function truncate() {
-    return function (value, wordwise, max, tail) {
-        if (!value) return '';
+    angular
+        .module('app')
+        .filter('truncate', truncate);
 
-        max = parseInt(max, 10);
-        if (!max) return value;
-        if (value.length <= max) return value;
+    function truncate() {
+        return function (value, wordwise, max, tail) {
+            if (!value) return '';
 
-        value = value.substr(0, max);
-        if (wordwise) {
-            var lastspace = value.lastIndexOf(' ');
-            if (lastspace != -1) {
-                value = value.substr(0, lastspace);
+            max = parseInt(max, 10);
+            if (!max) return value;
+            if (value.length <= max) return value;
+
+            value = value.substr(0, max);
+            if (wordwise) {
+                var lastspace = value.lastIndexOf(' ');
+                if (lastspace != -1) {
+                    value = value.substr(0, lastspace);
+                }
             }
-        }
 
-        return value + (tail || ' …');
-    };
-}
+            return value + (tail || ' …');
+        };
+    }
+})();

@@ -7,11 +7,14 @@
     ]);
 
     angular.module("vendor", [
+        "ngCookies",
         "ui.router",
         "ui.bootstrap",
         "ngRoute",
         "ngMessages",
-        "ngSanitize"
+        "ngSanitize",
+        "ui.select",
+        "pascalprecht.translate"
     ]);
 
     angular.module("app.constants", []);

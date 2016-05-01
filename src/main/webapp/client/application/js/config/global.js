@@ -28,7 +28,7 @@ angular.module("app")
 			});
 
 			$rootScope.$on("$stateChangeError", function(event, toState, toParams, fromState, fromParams, error) {
-	    			$state.go(appStates.PAGE_NOT_FOUND);
+	    		$state.go(appStates.PAGE_NOT_FOUND);
 		  	});
 		}
 	]);

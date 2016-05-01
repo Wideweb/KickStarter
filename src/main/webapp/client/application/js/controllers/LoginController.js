@@ -1,38 +1,56 @@
-angular.module('app').controller("LoginController", [
-        "$scope", "authService", "appStates", "$state", "router", LoginController]); 
+(function(){
+    "use strict";
+
+    angular
+        .module('app')
+        .controller("LoginController", 
+            ["authService", "appStates", "$state", "router", LoginController]); 
 
 
-function LoginController($scope, authService, appStates, $state, router) {
-    $scope.user = {};
-    $scope.isSubmitting = false;
-    $scope.serverError = "";
+    function LoginController(authService, appStates, $state, router) {
+        var vm = this;
 
-    $scope.login = function(user) {
-        $scope.serverError = "";
-        if($scope.userForm.$invalid){
-            angular.forEach($scope.userForm.$error.required, function(field){
-                field.$setTouched();
-            });
-            return;
-        }
+        vm.user = {};
+        vm.isSubmitting = false;
+        vm.serverError = "";
+        vm.login = login;
 
-        if ($scope.isSubmitting) {
-            return;
-        }
-
-        $scope.isSubmitting = true;
-        authService.login(user).then(
-            function(response){
-                if(router.hasRedirect()){
-                    router.redirect();
-                }else{
-                    $state.go(appStates.HOME);
-                }
-            },
-            function(data) {
-                $scope.serverError = data.statusText;
-                $scope.isSubmitting = false;
+        function login(user) {
+            vm.serverError = "";
+            if(!isLoginFormValid()){
+                return;
             }
-        );
+            if (vm.isSubmitting) {
+                return;
+            }
+            vm.isSubmitting = true;
+            authService
+                .login(user)
+                .then(onLoginSuccess)
+                .catch(onLoginFailed);
+        }
+
+        function isLoginFormValid(){
+            if(vm.userForm.$invalid){
+                angular.forEach(vm.userForm.$error.required, function(field){
+                    field.$setTouched();
+                });
+                return false;
+            }
+            return true;
+        }
+
+        function onLoginSuccess(response){
+            if(router.hasRedirect()){
+                router.redirect();
+            }else{
+                $state.go(appStates.USER_PROJECT_LIST);
+            }
+        }
+
+        function onLoginFailed(error){
+            vm.serverError = error.statusText;
+            vm.isSubmitting = false;
+        }
     }
-}
+})();

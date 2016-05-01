@@ -5,18 +5,22 @@ import com.kickstarter.extentions.Function;
 
 public class CustomJsonResult<TEntity> {
 
-    private JsonResultModel<TEntity> data;
+    private String errorMessage;
+    private TEntity data;
+    private Boolean success;
 
     public static <TEntity> CustomJsonResult TryGetJsonResult(Function<TEntity> function)
     {
         CustomJsonResult result = new CustomJsonResult();
         try
         {
-            result.SetData(function.getResult());
+            result.setData(function.getResult());
+            result.setSuccess(true);
         }
         catch (Exception e)
         {
-            result.SetError(e.getMessage());
+            result.setErrorMessage(e.getMessage());
+            result.setSuccess(false);
         }
         return result;
     }
@@ -27,38 +31,39 @@ public class CustomJsonResult<TEntity> {
         try
         {
             function.run();
-            result.SetData(true);
+            result.setData(true);
+            result.setSuccess(true);
         }
         catch (Exception e)
         {
-            result.SetError(e.getMessage());
+            result.setErrorMessage(e.getMessage());
+            result.setSuccess(false);
         }
         return result;
     }
 
-    public CustomJsonResult SetData(TEntity data)
-    {
-        JsonResultModel<TEntity> result = new JsonResultModel<TEntity>();
-        result.setData(data);
 
-        this.setData(result);
-        return this;
-    }
-
-    public CustomJsonResult SetError(String error)
-    {
-        JsonResultModel<TEntity> result = new JsonResultModel<TEntity>();
-        result.setErrorMessage(error);
-
-        this.setData(result);
-        return this;
-    }
-
-    public JsonResultModel<TEntity> getData() {
+    public TEntity getData() {
         return data;
     }
 
-    public void setData(JsonResultModel<TEntity> data) {
+    public void setData(TEntity data) {
         this.data = data;
+    }
+
+    public Boolean getSuccess() {
+        return success;
+    }
+
+    public void setSuccess(Boolean success) {
+        this.success = success;
+    }
+
+    public String getErrorMessage() {
+        return errorMessage;
+    }
+
+    public void setErrorMessage(String errorMessage) {
+        this.errorMessage = errorMessage;
     }
 }

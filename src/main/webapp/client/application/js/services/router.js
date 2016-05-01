@@ -1,18 +1,25 @@
-angular.module('app').factory('router', ['$location', router]);
+(function () {
+    "use strict";
 
-function router($location){
-	var redirectUrl = '';
+	angular
+		.module('app')
+		.factory('router', ['$location', router]);
 
-	return{
-		setRedirect: function(){
-			redirectUrl = $location.path();
-		},
-		hasRedirect: function(){
-			return !!redirectUrl;		
-		},
-		redirect: function(){
-			$location.path(redirectUrl);
-			redirectUrl = '';
+	function router($location){
+		var redirectUrl = '';
+
+		return{
+			setRedirect: function(){
+				redirectUrl = $location.path();
+			},
+			hasRedirect: function(){
+				return !!redirectUrl;		
+			},
+			redirect: function(){
+				$location.path(redirectUrl);
+				redirectUrl = '';
+			}
 		}
-	}
-};
+	};
+
+})();

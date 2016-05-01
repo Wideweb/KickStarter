@@ -3,7 +3,7 @@ package com.kickstarter.models;
 public class UserRegistrationModel {
     private String email;
     private String userName;
-    private String passord;
+    private String password;
 
     public String getEmail() {
         return email;
@@ -21,11 +21,11 @@ public class UserRegistrationModel {
         this.userName = userName;
     }
 
-    public String getPassord() {
-        return passord;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPassord(String passord) {
-        this.passord = passord;
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

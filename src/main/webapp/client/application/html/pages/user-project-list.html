@@ -1,0 +1,18 @@
+<div class="container">
+    <div class="row">
+        <div class="server-errors">
+            <span class="error-text">{{ vm.serverError }}</span>
+        </div>
+    </div>
+    <div ng-if="!vm.hasProjects()" class="row">
+        <h1 translate>YOU_DO_NOT_HAVE_PROJECTS</h1>
+    </div>
+    <div ng-if="vm.hasProjects()" class="row" ng-repeat="project in vm.projects track by id">
+        <h1 translate>YOUR_PROJECTS</h1>
+    </div>
+    <div ng-if="vm.hasProjects()" class="row">
+        <div ng-repeat="project in vm.projects track by project.id">
+            <span>{{$index + 1}}. {{ project.name }} - {{ project.projectType.name }} - {{ project.country.name }} </span>
+        </div>
+    </div>
+</div>

@@ -1,7 +1,22 @@
 body{
     background: @background-color;
+    min-width: 500px;
 }
 
-h1, h2, h3, input, span, textarea{
+h1, h2, h3, input, span{
     font-family: @base-font-family;
+    font-weight:normal;
+    color: 333333;
+}
+
+.row-centered {
+    text-align: center;
+}
+
+.flipH{
+    -moz-transform: scaleX(-1);    /* Gecko */
+    -o-transform: scaleX(-1);      /* Opera */
+    -webkit-transform: scaleX(-1); /* Webkit */
+    transform: scaleX(-1);         /* Standard */
+    filter: FlipH;                 /* IE 6/7/8 */
 }

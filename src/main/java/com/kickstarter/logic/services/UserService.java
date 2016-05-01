@@ -1,21 +1,26 @@
 package com.kickstarter.logic.services;
 
-import com.kickstarter.entitiesRepositories.IUserRepository;
+import com.kickstarter.entitiesRepositories.IRepository;
+import com.kickstarter.logic.domain.Role;
 import com.kickstarter.logic.domain.User;
 import com.kickstarter.logic.services.exceptions.UserAlreadyExistsException;
 import com.kickstarter.logic.services.exceptions.UserLoginException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-
 import javax.annotation.Resource;
-import java.util.List;
 
 @Service
 public class UserService implements IUserService {
 
+    @Resource(name = "encryptionService")
+    private IEncryptionService encryptionService;
+
     @Resource(name = "userRepository")
-    private IUserRepository userRepository;
+    private IRepository<User> userRepository;
+
+    @Resource(name = "roleRepository")
+    private IRepository<Role> roleRepository;
 
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
@@ -35,7 +40,20 @@ public class UserService implements IUserService {
             throw new UserAlreadyExistsException(user.getUsername());
         }
 
-        return null;
+        String salt = encryptionService.createSalt();
+
+        user.setSalt(salt);
+        user.setPassword(encryptionService.createPasswordHash(user.getPassword(), salt));
+        user.setRole(roleRepository
+                .getAll()
+                .stream()
+                .filter((Role r) -> r.getRoleName().equalsIgnoreCase(Role.UserRoleName))
+                .findFirst()
+                .get()
+        );
+
+        userRepository.add(user);
+        return user;
     }
 
     @Override
@@ -45,15 +63,21 @@ public class UserService implements IUserService {
             throw new UserLoginException();
         }
 
-        return null;
+        String passwordHash = encryptionService.createPasswordHash(password, existingUser.getSalt());
+        if (existingUser.getPassword().equalsIgnoreCase(passwordHash))
+        {
+            return existingUser;
+        }
+
+        throw new UserLoginException();
     }
 
-    private User getUserByName(String userName) {
+    public User getUserByName(String userName) {
         return userRepository
                 .getAll()
                 .stream()
-                .filter((User x) -> !x.getUsername().equalsIgnoreCase(userName))
+                .filter((User x) -> x.getUsername().equalsIgnoreCase(userName))
                 .findFirst()
-                .get();
+                .orElse(null);
     }
 }

@@ -1,0 +1,16 @@
+<ui-select ng-model="vm.selectedItem" theme="bootstrap"
+           ng-disabled="vm.disabled"
+           on-select="vm.itemSelected()"
+           ng-required="vm.required()"
+           name="vm.name"
+           class="ks-autocomplete">
+    <ui-select-match placeholder="{{vm.placeholder}}">
+        <span>{{$select.selected.text}}</span>
+        <button ng-disabled="vm.disabled" class="clean" ng-click="vm.clear($event)">x</button>    
+    </ui-select-match>
+    <ui-select-choices repeat="item in vm.filteredItems"
+                       refresh="vm.refreshItems($select.search)"
+                       refresh-delay="0">
+        <div ng-bind-html="item.text | highlight: $select.search"></div>
+    </ui-select-choices>
+</ui-select>

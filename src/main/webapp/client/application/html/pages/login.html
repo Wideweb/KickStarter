@@ -1,23 +1,26 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-                <h2>Log in</h2>
+                <h2 translate>LOG_IN</h2>
                 <div class="server-errors">
-                    <span class="error-text">{{ serverError }}</span>
+                    <span class="error-text">{{ vm.serverError }}</span>
                 </div>
-                <form name="userForm" class="form-horizontal" novalidate role="form">
+                <form name="vm.userForm" class="form-horizontal" novalidate role="form">
 
-                        <input-wrapper input-reference="userForm.userName" label="Name">
-                            <input ng-model="user.UserName" type="text" class="form-control" name="userName"
-                                       required xss ng-maxlength="50" />
+                        <input-wrapper input-reference="vm.userForm.username" label="Name">
+                            <input ng-model="vm.user.username" type="text" class="form-control" name="username"
+                                       required ng-maxlength="50" />
                         </input-wrapper>
 
-                        <input-wrapper input-reference="userForm.password" label="Password">
-                            <input ng-model="user.Password" type="password" class="form-control" name="password"
-                                       required xss ng-maxlength="50" />
+                        <input-wrapper input-reference="vm.userForm.password" label="Password">
+                            <input ng-model="vm.user.password" type="password" class="form-control" name="password"
+                                       required ng-maxlength="50" />
                         </input-wrapper>
 
-                    <button type="submit" class="btn btn-primary" ng-disabled="isSubmitting" ng-click="login(user)">Ok</button>
+                    <button type="submit" 
+                            class="btn btn-primary" 
+                            ng-disabled="vm.isSubmitting" 
+                            ng-click="vm.login(vm.user)" translate>OK</button>
                 </form>
         </div>
     </div>

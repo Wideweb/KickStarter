@@ -1,0 +1,55 @@
+<div class="container">
+    <div class="project-header">
+        <h1>{{ project.name }}</h1>
+        <h5>by {{ project.owner }}</h5>
+    </div>
+    <div class="row">
+        <div class="col-md-7">
+            {{ project.description }}
+        </div>
+        <div class="col-md-3">
+            <div class="project-main-info">
+                <ul>
+                    <li>
+                        <span class="value">{{ project.backers }}</span>
+                        <span class="annotation">backers</span>
+                    </li>
+                    <li>
+                        <span class="value">${{ project.pledged }}</span>
+                        <span class="annotation">pledged of ${{ project.fundingGoal }} goal</span>
+                    </li>
+                    <li>
+                        <span class="value">{{ project.daysToGo }}</span>
+                        <span class="annotation">days to go</span>
+                    </li>
+                </ul>
+            </div>
+            <button type="button" class="btn btn-success back-project-btn">Back this project</button>
+            <div>
+                <span class="rewards-header">Rewards</span>
+                <ul class="rewards">
+                    <li>
+                        <div class="reward">
+                    <span class="header">
+                        Pledge {{ reward }}$ or more
+                    </span>
+                            adsxascascsaxsa
+                            scacascsac
+                            scacscsa
+                            {{ reward }}
+                        </div>
+                    </li>
+                    <li ng-repeat="reward in project.rewards">
+                        <div class="reward">
+                    <span class="header">
+                        Pledge {{ reward }}$ or more
+                    </span>
+                            {{ reward }}
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+

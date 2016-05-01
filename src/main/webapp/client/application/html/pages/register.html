@@ -1,23 +1,31 @@
 <div class="container absolute-centered">
     <div class="row row-centered">
         <div class="col-md-8 col-md-offset-2">
-                <h2 class="trip-request-header">Fill registration form</h2>
+                <h2 class="trip-request-header" translate>FILL_REGISTRATION_FORM</h2>
                 <div class="server-errors">
-                    <span class="error-text">{{ serverError }}</span>
+                    <span class="error-text">{{ vm.serverError }}</span>
                 </div>
-                <form name="userForm" class="form-horizontal" novalidate role="form">
+                <form name="vm.userForm" class="form-horizontal" novalidate role="form">
 
-                        <input-wrapper input-reference="userForm.userName" label="Name">
-                            <input ng-model="user.UserName" type="text" class="form-control" name="userName"
-                                       required xss ng-maxlength="50" />
+                        <input-wrapper input-reference="vm.userForm.userName" label="Name">
+                            <input ng-model="vm.user.userName" type="text" class="form-control" name="userName"
+                                       required ng-maxlength="50" />
                         </input-wrapper>
 
-                        <input-wrapper input-reference="userForm.password" label="Password">
-                            <input ng-model="user.Password" type="password" class="form-control" name="password"
-                                       required xss ng-maxlength="50" />
+                        <input-wrapper input-reference="vm.userForm.email" label="Email">
+                            <input ng-model="vm.user.email" type="text" class="form-control" name="email"
+                                       required ng-maxlength="50" />
                         </input-wrapper>
 
-                    <button type="submit" class="btn btn-primary hr-centered" ng-disabled="isSubmitting" ng-click="register(user)">Ok</button>
+                        <input-wrapper input-reference="vm.userForm.password" label="Password">
+                            <input ng-model="vm.user.password" type="password" class="form-control" name="password"
+                                       required ng-maxlength="50" />
+                        </input-wrapper>
+
+                    <button type="submit" 
+                            class="btn btn-primary hr-centered" 
+                            ng-disabled="vm.isSubmitting" 
+                            ng-click="vm.register(vm.user)" translate>OK</button>
                 </form>
         </div>
     </div>
