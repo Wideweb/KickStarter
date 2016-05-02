@@ -88,9 +88,8 @@
                                 item-source-url="{{ vm.urls.COUNTRY_LOOKUPS }}">
                         </ks-autocomplete>
                         <p class="creation-location-info">
-                            * Project creation is currently open to creators in Austria, Australia, Belgium, Canada,
-                            Switzerland, Germany, Denmark, Spain, France, the United Kingdom, Ireland, Italy,
-                            Luxembourg, the Netherlands, Norway, New Zealand, Sweden, and the United States
+                        * Project creation is currently open to creators in
+                        <span ng-repeat="country in vm.supportedCountries">{{ country.text }}&nbsp</span>
                         </p>
                     </div>
                     <div class="col-sm-7 col-xs-6">
