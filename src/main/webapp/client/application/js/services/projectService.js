@@ -11,8 +11,9 @@
             getProject: getProject,
             getUserProjects: getUserProjects,
             getAll: getAll,
-            donateToProject: donateToProject
-        }
+            donateToProject: donateToProject,
+            getAllByCategory: getAllByCategory,
+        };
 
         function saveProject(project){
             return $http.post(urls.PROJECT_SAVE, project);
@@ -36,6 +37,10 @@
 
         function donateToProject(donation){
             return $http.post(urls.DONATE_TO_PROJECT, donation);
+        }
+        
+        function getAllByCategory(categoryId) {
+            return $http.get(urls.PROJECTS_BY_CATEGORY + categoryId);
         }
     }
 })();

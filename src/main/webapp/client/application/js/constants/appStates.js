@@ -12,6 +12,8 @@
         USER_PROJECT_LIST: "user-project-list",
         DONATE_TO_PROJECT: "donate-to-project",
         PROJECT: "project",
+        DISCOVER: "discover",
+        PROJECTS_BY_CATEGORY: "projectsByCategory"
     };
 
     angular.module("app.constants")

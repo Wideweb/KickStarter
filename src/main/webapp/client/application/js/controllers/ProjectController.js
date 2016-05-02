@@ -4,10 +4,10 @@
     angular
         .module('app')
         .controller("ProjectController",
-            ["projectService", "$state", "$scope", "appStates", ProjectController]);
+            ["projectService", "documentService", "$state", "$scope", "appStates", ProjectController]);
 
 
-    function ProjectController(projectService, $state, $scope, appStates) {
+    function ProjectController(projectService, documentService, $state, $scope, appStates) {
         $scope.project = {};
         $scope.serverError = "";
         $scope.backThisProject = backThisProject;
@@ -18,7 +18,6 @@
         function getProject(projectId) {
             projectService.getProject(projectId)
                 .then(function (res) {
-                    console.log(res.data);
                     $scope.project = res.data;
                 })
                 .catch(function (err) {
@@ -26,8 +25,8 @@
                 })
         }
 
-        function backThisProject(){
-            $state.go(appStates.DONATE_TO_PROJECT, {
+        $scope.downloadProjectPDF = function(projectId) {
+            documentService.downloadProjectPDF(projectId);
                 projectId: $state.params.projectId
             });
         }
