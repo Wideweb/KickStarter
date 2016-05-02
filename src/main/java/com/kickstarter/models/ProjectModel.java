@@ -1,7 +1,9 @@
 package com.kickstarter.models;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 public class ProjectModel {
     private Integer id;
@@ -15,6 +17,11 @@ public class ProjectModel {
     private Integer pledged;
     private Integer fundingGoal;
     private Integer fundingDuration;
+    private List<RewardModel> rewards;
+
+    public ProjectModel(){
+        rewards = new ArrayList<RewardModel>();
+    }
 
     public Integer getId() {
         return id;
@@ -102,5 +109,13 @@ public class ProjectModel {
 
     public void setPledged(Integer pledged) {
         this.pledged = pledged;
+    }
+
+    public List<RewardModel> getRewards() {
+        return rewards;
+    }
+
+    public void setRewards(List<RewardModel> rewards) {
+        this.rewards = rewards;
     }
 }

@@ -63,7 +63,7 @@
                         controller: "ProjectController"
                     })
                     .state(appStates.DONATE_TO_PROJECT, {
-                        url: "/donate-to-project",
+                        url: "/donate-to-project/:projectId",
                         templateUrl: appSettings.pagesFolderPath + "donate-to-project.html",
                         controller: "DonateToProjectController",
                         controllerAs: "vm",

@@ -1,6 +1,8 @@
 package com.kickstarter.logic.domain;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class Project extends EntityBase {
     private String name;
@@ -11,6 +13,11 @@ public class Project extends EntityBase {
     private Date startDate;
     private Integer fundingGoal;
     private Integer fundingDuration;
+    private List<Reward> rewards;
+
+    public Project(){
+        rewards = new ArrayList<Reward>();
+    }
 
     public String getName() {
         return name;
@@ -74,5 +81,13 @@ public class Project extends EntityBase {
 
     public void setFundingDuration(Integer fundingDuration) {
         this.fundingDuration = fundingDuration;
+    }
+
+    public List<Reward> getRewards() {
+        return rewards;
+    }
+
+    public void setRewards(List<Reward> rewards) {
+        this.rewards = rewards;
     }
 }

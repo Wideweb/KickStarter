@@ -1,11 +1,9 @@
 package com.kickstarter.controllers;
 
 import com.kickstarter.controllers.tools.CustomJsonResult;
-import com.kickstarter.logic.domain.User;
 import com.kickstarter.logic.services.IProjectService;
-import com.kickstarter.logic.services.IUserService;
+import com.kickstarter.models.DonationModel;
 import com.kickstarter.models.ProjectModel;
-import com.kickstarter.models.UserRegistrationModel;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -48,5 +46,13 @@ public class ProjectController {
     CustomJsonResult GetAll(HttpServletRequest request) {
         return CustomJsonResult.TryGetJsonResult(() ->
                 projectService.getAll());
+    }
+
+    @RequestMapping(value = "donate", method = RequestMethod.POST)
+    public
+    @ResponseBody
+    CustomJsonResult DonateToProject(@RequestBody DonationModel model, HttpServletRequest request) {
+        return CustomJsonResult.TryExecute(() ->
+                projectService.donateToProject(model, request.getUserPrincipal().getName()));
     }
 }
