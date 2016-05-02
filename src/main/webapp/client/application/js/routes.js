@@ -61,6 +61,15 @@
                         url: "/project/:projectId",
                         templateUrl: appSettings.pagesFolderPath + "project.html",
                         controller: "ProjectController"
+                    })
+                    .state(appStates.DONATE_TO_PROJECT, {
+                        url: "/donate-to-project/:projectId",
+                        templateUrl: appSettings.pagesFolderPath + "donate-to-project.html",
+                        controller: "DonateToProjectController",
+                        controllerAs: "vm",
+                        data:{
+                            authenticate: true
+                        }
                     });
             }
         ]);

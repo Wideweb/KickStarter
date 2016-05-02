@@ -54,6 +54,9 @@
     <spring:url value="/client/application/js/controllers/ProjectController.js" var="appProjectControllerJs" />
     <script src="${appProjectControllerJs}"></script>
 
+    <spring:url value="/client/application/js/controllers/DonateToProjectController.js" var="appDonateToProjectControllerJs" />
+    <script src="${appDonateToProjectControllerJs}"></script>
+
     <spring:url value="/client/application/js/directives/custom-forms.js" var="appCustomFormsDirectiveJs" />
     <script src="${appCustomFormsDirectiveJs}"></script>
 
@@ -86,3 +89,9 @@
 
     <spring:url value="/client/application/js/services/router.js" var="appRouterServiceJs" />
     <script src="${appRouterServiceJs}"></script>
+
+    <spring:url value="/client/application/js/services/modalService.js" var="appModalServiceJs" />
+    <script src="${appModalServiceJs}"></script>
+
+    <spring:url value="/client/application/js/modals/confirmationModal.js" var="appConfirmationModalJs" />
+    <script src="${appConfirmationModalJs}"></script>

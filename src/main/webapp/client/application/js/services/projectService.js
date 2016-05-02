@@ -10,7 +10,8 @@
             saveProject: saveProject,
             getProject: getProject,
             getUserProjects: getUserProjects,
-            getAll: getAll
+            getAll: getAll,
+            donateToProject: donateToProject
         }
 
         function saveProject(project){
@@ -31,6 +32,10 @@
 
         function getAll(){
             return $http.get(urls.PROJECTS_GET_ALL);
+        }
+
+        function donateToProject(donation){
+            return $http.post(urls.DONATE_TO_PROJECT, donation);
         }
     }
 })();

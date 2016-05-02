@@ -4,12 +4,13 @@
     angular
         .module('app')
         .controller("ProjectController",
-            ["projectService", "$state", "$scope", ProjectController]);
+            ["projectService", "$state", "$scope", "appStates", ProjectController]);
 
 
-    function ProjectController(projectService, $state, $scope) {
+    function ProjectController(projectService, $state, $scope, appStates) {
         $scope.project = {};
         $scope.serverError = "";
+        $scope.backThisProject = backThisProject;
 
         var projectId = $state.params.projectId;
         getProject(projectId);
@@ -23,6 +24,12 @@
                 .catch(function (err) {
                     $scope.serverError = err.statusText;
                 })
+        }
+
+        function backThisProject(){
+            $state.go(appStates.DONATE_TO_PROJECT, {
+                projectId: $state.params.projectId
+            });
         }
     }
 })();

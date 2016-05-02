@@ -12,7 +12,13 @@
     <spring:url value="/client/components/angular-cookies/angular-cookies.js" var="angularCookiesJS" />
     <script src="${angularCookiesJS}"></script>
 
-    <spring:url value="/client/components/angular-bootstrap/ui-bootstrap-tpls.js" var="angularBootstrapJs" />
+    <spring:url value="/client/components/angular-animate/angular-animate.js" var="angularAnimateJS" />
+    <script src="${angularAnimateJS}"></script>
+
+    <spring:url value="/client/components/angular-bootstrap/ui-bootstrap-tpls.js" var="angularBootstrapTplsJs" />
+    <script src="${angularBootstrapTplsJs}"></script>
+
+    <spring:url value="/client/components/angular-bootstrap/ui-bootstrap.js" var="angularBootstrapJs" />
     <script src="${angularBootstrapJs}"></script>
 
     <spring:url value="/client/components/angular-route/angular-route.js" var="angularRouteJs" />

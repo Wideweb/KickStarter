@@ -2,7 +2,9 @@ package com.kickstarter.logic.services;
 
 import com.kickstarter.entitiesRepositories.IRepository;
 import com.kickstarter.logic.domain.*;
+import com.kickstarter.models.DonationModel;
 import com.kickstarter.models.ProjectModel;
+import com.kickstarter.models.RewardModel;
 
 import javax.annotation.Resource;
 import java.util.Date;
@@ -20,6 +22,12 @@ public class ProjectService implements IProjectService {
     @Resource(name = "countryRepository")
     private IRepository<Country> countryRepository;
 
+    @Resource(name = "rewardRepository")
+    private IRepository<Reward> rewardRepository;
+
+    @Resource(name = "donationRepository")
+    private IRepository<Donation> donationRepository;
+
     @Resource(name = "userService")
     private IUserService userService;
 
@@ -34,6 +42,16 @@ public class ProjectService implements IProjectService {
         project.setFundingDuration(projectModel.getFundingDuration());
         project.setFundingGoal(projectModel.getFundingGoal());
         project.setStartDate(new Date());
+
+        for(Integer i = 0; i < projectModel.getRewards().size(); i++){
+            RewardModel rewardModel = projectModel.getRewards().get(i);
+            Reward reward = new Reward();
+            reward.setId(rewardModel.getId());
+            reward.setAmount(rewardModel.getAmount());
+            reward.setDescription(rewardModel.getDescription());
+            reward.setProject(project);
+            project.getRewards().add(reward);
+        }
 
         if(projectModel.getId() != null && projectModel.getId() > 0){
             projectRepository.update(project);
@@ -61,6 +79,16 @@ public class ProjectService implements IProjectService {
         projectModel.setFundingGoal(project.getFundingGoal());
         projectModel.setFundingDuration(project.getFundingDuration());
 
+        for(Integer i = 0; i < project.getRewards().size(); i++){
+            Reward reward = project.getRewards().get(i);
+            RewardModel rewardModel = new RewardModel();
+            rewardModel.setId(reward.getId());
+            rewardModel.setAmount(reward.getAmount());
+            rewardModel.setDescription(reward.getDescription());
+            rewardModel.setProjectId(project.getId());
+            projectModel.getRewards().add(rewardModel);
+        }
+
         return projectModel;
     }
 
@@ -74,5 +102,16 @@ public class ProjectService implements IProjectService {
 
     public List<Project> getAll(){
         return projectRepository.getAll();
+    }
+
+    public void donateToProject(DonationModel model, String userName){
+        Donation donation = new Donation();
+        donation.setProject(projectRepository.getById(model.getProjectId()));
+        donation.setUser(userService.getUserByName(userName));
+        donation.setAmount(model.getAmount());
+        if(model.getRewardId() >= 0){
+            donation.setReward(rewardRepository.getById(model.getRewardId()));
+        }
+        donationRepository.add(donation);
     }
 }

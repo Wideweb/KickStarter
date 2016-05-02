@@ -13,6 +13,7 @@
         ACCOUNT_LOGIN: serverPath + 'account/login',
         ACCOUNT_LOGOFF: serverPath + 'account/logoff',
         USER_PROJECTS:  serverPath + 'project/getUserProjects',
+        DONATE_TO_PROJECT:  serverPath + 'project/donate',
     }
 
     angular.module("app.constants")

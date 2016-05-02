@@ -8,8 +8,10 @@
 
     angular.module("vendor", [
         "ngCookies",
+        "ngAnimate",
         "ui.router",
         "ui.bootstrap",
+        "ui.bootstrap.tpls",
         "ngRoute",
         "ngMessages",
         "ngSanitize",
