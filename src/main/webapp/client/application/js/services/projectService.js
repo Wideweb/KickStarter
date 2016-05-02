@@ -16,7 +16,15 @@
         };
 
         function saveProject(project){
-            return $http.post(urls.PROJECT_SAVE, project);
+            //return //$http.post(urls.PROJECT_SAVE, project);
+            return $http({
+                url: urls.PROJECT_SAVE,
+                dataType: 'json',
+                method: 'POST',
+                data: project,
+                headers: {
+                "Content-Type": "application/json"}
+            });
         }
 
         function getProject(projectId){

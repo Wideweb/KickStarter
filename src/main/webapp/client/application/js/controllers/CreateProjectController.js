@@ -11,18 +11,20 @@
         var vm = this;
 
         vm.urls = urls;
-        vm.project = {};
+        vm.project = { rewards: [] };
         vm.serverError = '';
         vm.isSubmitting = false;
         vm.supportedCountries = {};
         vm.save = save;
+        vm.addReward = addReward;
 
         activate();
 
         function activate(){
             fetchSupportedCountries();
+            addReward();
         }
-
+        
         function save(){
             vm.serverError = "";
             if(!isProjectFormValid()){
@@ -42,6 +44,10 @@
 
         function fetchSupportedCountries(){
             $http.get(urls.COUNTRY_LOOKUPS).then(function(response){ vm.supportedCountries = response.data });
+        }
+
+        function addReward() {
+            vm.project.rewards.push({ amount: '', description: '' });
         }
 
         function isProjectFormValid(){
