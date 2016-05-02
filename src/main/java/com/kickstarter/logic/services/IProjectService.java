@@ -12,4 +12,5 @@ public interface IProjectService {
     List<Project> getUserProjects(String userName);
     List<Project> getAll();
     void donateToProject(DonationModel model, String userName);
+    List<Project> getAllByCategory(Integer categoryId);
 }

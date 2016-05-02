@@ -6,6 +6,8 @@
     <div class="row">
         <div class="col-md-7">
             {{ project.description }}
+            <br>
+            <button type="button" class="btn download-project-btn" ng-click="downloadProjectPDF(project.id)">Download project</button>
         </div>
         <div class="col-md-3">
             <div class="project-main-info">
@@ -24,7 +26,7 @@
                     </li>
                 </ul>
             </div>
-            <button type="button" class="btn btn-success back-project-btn" ng-click="backThisProject()">Back this project</button>
+            <button type="button" class="btn back-project-btn" ng-click="backThisProject()">Back this project</button>
             <div>
                 <span class="rewards-header">Rewards</span>
                 <ul class="rewards">

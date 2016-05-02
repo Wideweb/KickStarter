@@ -5,6 +5,12 @@ import com.kickstarter.logic.domain.*;
 import com.kickstarter.models.DonationModel;
 import com.kickstarter.models.ProjectModel;
 import com.kickstarter.models.RewardModel;
+import com.kickstarter.models.ProjectTypeModel;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
+import org.hibernate.transform.AliasToBeanResultTransformer;
 
 import javax.annotation.Resource;
 import java.util.Date;
@@ -12,6 +18,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ProjectService implements IProjectService {
+
+    @Resource(name = "sessionFactory")
+    private SessionFactory sessionFactory;
 
     @Resource(name = "projectRepository")
     private IRepository<Project> projectRepository;
@@ -113,5 +122,13 @@ public class ProjectService implements IProjectService {
             donation.setReward(rewardRepository.getById(model.getRewardId()));
         }
         donationRepository.add(donation);
+    }
+    
+    public List<Project> getAllByCategory(Integer categoryId){
+        Session session = sessionFactory.openSession();
+        return (List<Project>) session
+                .createCriteria(Project.class)
+                .add(Restrictions.eq("projectType.id", categoryId))
+                .list();
     }
 }

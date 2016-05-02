@@ -1,7 +1,7 @@
 package com.kickstarter.views;
 
 import java.net.URL;
-import java.util.List;
+import java.util.Formatter;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,14 +11,17 @@ import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+import com.kickstarter.models.ProjectModel;
 
 
-public class PDFBuilder extends AbstractITextPdfView {
+public class ProjectPDFBuilder extends AbstractITextPdfView {
 
     @Override
     protected void buildPdfDocument(Map<String, Object> model, Document doc,
                                     PdfWriter writer, HttpServletRequest request, HttpServletResponse response)
             throws Exception {
+
+        ProjectModel project = (ProjectModel) model.get("project");
 
         // Header
 
@@ -31,11 +34,21 @@ public class PDFBuilder extends AbstractITextPdfView {
         }
 
         // Body
-        Font titleFont = new Font(Font.FontFamily.TIMES_ROMAN, 50.0f, Font.BOLD, BaseColor.BLACK);
-        Paragraph title = new Paragraph("Project Name", titleFont);
+        Font titleFont = new Font(Font.FontFamily.TIMES_ROMAN, 60.0f, Font.BOLD, BaseColor.BLACK);
+        Paragraph title = new Paragraph(project.getName(), titleFont);
         doc.add(title);
-        Font descriptionFont = new Font(Font.FontFamily.TIMES_ROMAN, 20.0f, Font.NORMAL, BaseColor.BLACK);
-        Paragraph description = new Paragraph("Project Description", descriptionFont);
+        Font mainInfoFont = new Font(Font.FontFamily.TIMES_ROMAN, 20.0f, Font.ITALIC, BaseColor.BLACK);
+        Formatter f = new Formatter();
+        Paragraph mainInfo = new Paragraph(
+                f.format("%s backers.\n" +
+                        "%s$ pledged of %s$ total\n" +
+                        "%s days to go",
+                        project.getBackers(), project.getPledged(),
+                        project.getFundingGoal(), project.getDaysToGo()).toString(),
+                mainInfoFont);
+        doc.add(mainInfo);
+        Font descriptionFont = new Font(Font.FontFamily.TIMES_ROMAN, 15.0f, Font.NORMAL, BaseColor.BLACK);
+        Paragraph description = new Paragraph(project.getDescription(), descriptionFont);
         doc.add(description);
 
         PdfPTable table = new PdfPTable(2);
@@ -47,7 +60,7 @@ public class PDFBuilder extends AbstractITextPdfView {
         PdfPCell cell = new PdfPCell();
         cell.setBackgroundColor(BaseColor.GREEN);
         cell.setPadding(5);
-        cell.setPhrase(new Phrase("Offer", font));
+        cell.setPhrase(new Phrase("Reward", font));
         table.addCell(cell);
 
         cell.setPhrase(new Phrase("Price", font));
