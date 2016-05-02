@@ -10,7 +10,6 @@
     function ProjectController(projectService, documentService, $state, $scope, appStates) {
         $scope.project = {};
         $scope.serverError = "";
-        $scope.backThisProject = backThisProject;
 
         var projectId = $state.params.projectId;
         getProject(projectId);
@@ -27,6 +26,10 @@
 
         $scope.downloadProjectPDF = function(projectId) {
             documentService.downloadProjectPDF(projectId);
+        }
+
+        $scope.backThisProject = function(){
+            $state.go(appStates.DONATE_TO_PROJECT, {
                 projectId: $state.params.projectId
             });
         }

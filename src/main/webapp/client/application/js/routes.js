@@ -69,6 +69,7 @@
                         controllerAs: "vm",
                         data:{
                             authenticate: true
+                        }
                     })
                     .state(appStates.PROJECTS_BY_CATEGORY, {
                         url: "/projects/:categoryId",
