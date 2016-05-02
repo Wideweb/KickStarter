@@ -4,22 +4,23 @@
     angular
         .module('app')
         .controller("CreateProjectController", 
-            ["urls", "projectService", "appStates", "$state", CreateProjectController]);
+            ["$http", "urls", "projectService", "appStates", "$state", CreateProjectController]);
 
 
-    function CreateProjectController(urls, projectService, appStates, $state) {
+    function CreateProjectController($http, urls, projectService, appStates, $state) {
         var vm = this;
 
         vm.urls = urls;
         vm.project = {};
         vm.serverError = '';
         vm.isSubmitting = false;
+        vm.supportedCountries = {};
         vm.save = save;
 
         activate();
 
         function activate(){
-
+            fetchSupportedCountries();
         }
 
         function save(){
@@ -37,6 +38,10 @@
                 .finally(function(){
                     vm.isSubmitting = false;
                 });
+        }
+
+        function fetchSupportedCountries(){
+            $http.get(urls.COUNTRY_LOOKUPS).then(function(response){ vm.supportedCountries = response.data });
         }
 
         function isProjectFormValid(){
