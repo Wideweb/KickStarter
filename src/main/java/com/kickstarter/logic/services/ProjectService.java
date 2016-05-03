@@ -180,6 +180,8 @@ public class ProjectService implements IProjectService {
         Session session = sessionFactory.openSession();
         return (List<Project>) session
                 .createCriteria(Project.class)
+                .add(Restrictions.eq("approved", true))
+                .add(Restrictions.ge("endDate", new Date()))
                 .add(Restrictions.eq("projectType.id", categoryId))
                 .list();
     }
