@@ -33,6 +33,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "project/donate", "project/save", "account/logoff").hasAnyRole(Role.AdminRoleName, Role.UserRoleName)
                 .antMatchers(HttpMethod.GET, "project/getUserProjects", "project/get").hasAnyRole(Role.AdminRoleName, Role.UserRoleName)
                 .antMatchers("/admin/**").hasRole(Role.AdminRoleName)
+                //.antMatchers("/project/getUnapproved").hasRole(Role.AdminRoleName)
+                //.antMatchers("/project/approve").hasRole(Role.AdminRoleName)
+                //.antMatchers("/project/reject").hasRole(Role.AdminRoleName)
                 .and().csrf().disable();
                 //.and().exceptionHandling().accessDeniedPage("/Access_Denied");
     }

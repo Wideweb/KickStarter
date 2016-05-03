@@ -4,7 +4,6 @@ package com.kickstarter.models;
 public class ProjectTypeModel {
     private Integer id;
     private String name;
-
     private Integer count;
 
     public String getName() {

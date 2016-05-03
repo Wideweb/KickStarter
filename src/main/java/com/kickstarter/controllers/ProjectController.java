@@ -32,6 +32,22 @@ public class ProjectController {
         return CustomJsonResult.TryGetJsonResult(() -> projectService.get(projectId));
     }
 
+    @RequestMapping(value = "approve/{projectId}", method = RequestMethod.GET)
+    public
+    @ResponseBody
+    CustomJsonResult Approve(@PathVariable(value="projectId") Integer projectId, HttpServletRequest request) {
+        projectService.approveProject(projectId);
+        return CustomJsonResult.TryGetJsonResult(() -> "OK");
+    }
+
+    @RequestMapping(value = "reject/{projectId}", method = RequestMethod.GET)
+    public
+    @ResponseBody
+    CustomJsonResult Reject(@PathVariable(value="projectId") Integer projectId, HttpServletRequest request) {
+        projectService.rejectProject(projectId);
+        return CustomJsonResult.TryGetJsonResult(() -> "OK");
+    }
+
     @RequestMapping(value = "getUserProjects", method = RequestMethod.GET)
     public
     @ResponseBody
@@ -45,7 +61,15 @@ public class ProjectController {
     @ResponseBody
     CustomJsonResult GetAll(HttpServletRequest request) {
         return CustomJsonResult.TryGetJsonResult(() ->
-                projectService.getAll());
+                projectService.getActive());
+    }
+
+    @RequestMapping(value = "getUnapproved", method = RequestMethod.GET)
+    public
+    @ResponseBody
+    CustomJsonResult GetUnapproved(HttpServletRequest request) {
+        return CustomJsonResult.TryGetJsonResult(() ->
+                projectService.getProjectsForApproving());
     }
 
     @RequestMapping(value = "donate", method = RequestMethod.POST)

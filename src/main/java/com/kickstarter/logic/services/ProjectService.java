@@ -9,10 +9,13 @@ import com.kickstarter.models.ProjectTypeModel;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.transform.AliasToBeanResultTransformer;
 
 import javax.annotation.Resource;
+import java.sql.Time;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -75,6 +78,7 @@ public class ProjectService implements IProjectService {
         Project project = projectRepository.getById(projectId);
         long diff = new Date().getTime() - project.getStartDate().getTime();
         int daysToGo = project.getFundingDuration() - (int)diff / (24 * 60 * 60 * 1000);
+        //long backers = session.createCriteria("Book").setProjection(Projections.rowCount()).uniqueResult();
         ProjectModel projectModel = new ProjectModel();
         projectModel.setId(project.getId());
         projectModel.setName(project.getName());
@@ -101,6 +105,39 @@ public class ProjectService implements IProjectService {
         return projectModel;
     }
 
+    public void approveProject(Integer projectId) {
+        Session session = sessionFactory.openSession();
+        try {
+            session.getTransaction().begin();
+            Project project = projectRepository.getById(projectId);
+            project.setApproved(true);
+            long ltime = new Date().getTime() + project.getFundingDuration() * 24 * 60 * 60 * 1000;
+            Date endDate = new Date(ltime);
+            project.setEndDate(endDate);
+            project.setStartDate(new Date());
+            session.update(project);
+            session.getTransaction().commit();
+        }
+        catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        }
+    }
+
+    public void rejectProject(Integer projectId) {
+        Session session = sessionFactory.openSession();
+        try {
+            session.getTransaction().begin();
+            Project project = projectRepository.getById(projectId);
+            project.setApproved(false);
+            session.update(project);
+            session.getTransaction().commit();
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        }
+    }
+
     public List<Project> getUserProjects(String userName){
         return projectRepository
                 .getAll()
@@ -111,6 +148,33 @@ public class ProjectService implements IProjectService {
 
     public List<Project> getAll(){
         return projectRepository.getAll();
+    }
+
+    public List<Project> getActive(){
+        Session session = sessionFactory.openSession();
+        return (List<Project>) session
+                .createCriteria(Project.class)
+                .add(Restrictions.eq("approved", true))
+                .add(Restrictions.ge("endDate", new Date()))
+                .list();
+    }
+
+    public List<Project> getProjectsForApproving(){
+        Session session = sessionFactory.openSession();
+        return (List<Project>) session
+                .createCriteria(Project.class)
+                .add(Restrictions.eq("approved", true))
+                .add(Restrictions.lt("endDate", new Date()))
+                .list();
+    }
+
+    @Override
+    public List<Project> getFinished() {
+        Session session = sessionFactory.openSession();
+        return (List<Project>) session
+                .createCriteria(Project.class)
+                .add(Restrictions.isNull("approved"))
+                .list();
     }
 
     public void donateToProject(DonationModel model, String userName){
@@ -128,6 +192,8 @@ public class ProjectService implements IProjectService {
         Session session = sessionFactory.openSession();
         return (List<Project>) session
                 .createCriteria(Project.class)
+                .add(Restrictions.eq("approved", true))
+                .add(Restrictions.ge("endDate", new Date()))
                 .add(Restrictions.eq("projectType.id", categoryId))
                 .list();
     }

@@ -13,6 +13,9 @@
             getAll: getAll,
             donateToProject: donateToProject,
             getAllByCategory: getAllByCategory,
+            getUnapprovedProjects: getUnapprovedProjects,
+            approveProject: approveProject,
+            rejectProject: rejectProject,
         };
 
         function saveProject(project){
@@ -49,6 +52,18 @@
         
         function getAllByCategory(categoryId) {
             return $http.get(urls.PROJECTS_BY_CATEGORY + categoryId);
+        }
+
+        function getUnapprovedProjects() {
+            return $http.get(urls.UNAPPROVED_PROJECTS);
+        }
+
+        function approveProject(projectId) {
+            return $http.get(urls.APPROVE_PROJECT + projectId);
+        }
+
+        function rejectProject(projectId) {
+            return $http.get(urls.REJECT_PROJECT + projectId);
         }
     }
 })();

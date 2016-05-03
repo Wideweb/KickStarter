@@ -27,7 +27,9 @@ public class ProjectTypeService implements IProjectTypeService {
         return session.createSQLQuery("Select  projecttypes.id, projecttypes.name, " +
                 "cast(count(projects.id) as Integer)" +
                 "from projecttypes inner join projects \n" +
-                "on projecttypes.id = projects.project_type_id group by projecttypes.id").
+                "on projecttypes.id = projects.project_type_id where " +
+                "projects.is_approved=TRUE and projects.end_date >= now()" +
+                "group by projecttypes.id").
                 setResultTransformer(new AliasToBeanResultTransformer(ProjectTypeModel.class))
                 .list();
     }

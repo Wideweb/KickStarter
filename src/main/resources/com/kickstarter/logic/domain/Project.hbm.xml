@@ -23,6 +23,12 @@
         <property name="fundingDuration" type="java.lang.Integer">
             <column name="funding_duration" not-null="true" default="30" />
         </property>
+        <property name="approved" type="java.lang.Boolean">
+            <column name="is_approved" not-null="false" default="null" />
+        </property>
+        <property name="endDate" type="java.util.Date">
+            <column name="end_date" not-null="false" default="null" />
+        </property>
         <many-to-one name="projectType" class="com.kickstarter.logic.domain.ProjectType" fetch="join">
             <column name="project_type_id" not-null="true"/>
         </many-to-one>
