@@ -17,6 +17,7 @@ public class ProjectModel {
     private Integer pledged;
     private Integer fundingGoal;
     private Integer fundingDuration;
+    private Boolean isApproved;
     private List<RewardModel> rewards;
 
     public ProjectModel(){
@@ -117,5 +118,13 @@ public class ProjectModel {
 
     public void setRewards(List<RewardModel> rewards) {
         this.rewards = rewards;
+    }
+
+    public Boolean getApproved() {
+        return isApproved;
+    }
+
+    public void setApproved(Boolean approved) {
+        isApproved = approved;
     }
 }

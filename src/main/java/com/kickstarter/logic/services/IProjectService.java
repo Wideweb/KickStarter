@@ -13,4 +13,8 @@ public interface IProjectService {
     List<Project> getAll();
     void donateToProject(DonationModel model, String userName);
     List<Project> getAllByCategory(Integer categoryId);
+    List<Project> getActive();
+    List<Project> getProjectsForApproving();
+    void approveProject(Integer projectId);
+    void rejectProject(Integer projectId);
 }

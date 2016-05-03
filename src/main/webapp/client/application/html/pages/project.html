@@ -3,6 +3,10 @@
         <h1>{{ project.name }}</h1>
         <h5>by {{ project.owner }}</h5>
     </div>
+    <div ng-show="isAdmin()" class="row" style="text-align: center;">
+        <button type="button" class="btn btn-success btn-lg" ng-click="approve()">Approve</button>
+        <button type="button" class="btn btn-danger btn-lg" ng-click="reject()">Reject</button>
+    </div>
     <div class="row">
         <div class="col-md-7">
             {{ project.description }}

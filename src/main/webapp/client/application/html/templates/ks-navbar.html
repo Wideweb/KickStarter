@@ -44,7 +44,14 @@
                 </div>
 
                 <div ng-show="vm.isAuthorized()" class="btn-group navbar-right">
-                    <a class="btn btn-primary" ng-click="vm.signOut()" translate>SIGN_OUT</a>
+                    <a class="btn btn-primary dropdown-toggle"
+                       data-toggle="dropdown" aria-haspopup="true"
+                       aria-expanded="false" translate>Account</a>
+                    <ul class="dropdown-menu">
+                        <li><a ng-show="vm.isAdmin()" style="cursor: pointer;"
+                               ng-click="vm.goToUnapprovedProjects()">Unapproved Projects</a></li>
+                        <li><a style="cursor: pointer;" ng-click="vm.signOut()">Log out</a></li>
+                    </ul>
                 </div>
             </form>
         </div>

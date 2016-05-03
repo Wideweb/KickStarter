@@ -13,7 +13,8 @@
         DONATE_TO_PROJECT: "donate-to-project",
         PROJECT: "project",
         DISCOVER: "discover",
-        PROJECTS_BY_CATEGORY: "projectsByCategory"
+        PROJECTS_BY_CATEGORY: "projectsByCategory",
+        UNAPPROVED_PROJECTS: "unapprovedProjects"
     };
 
     angular.module("app.constants")

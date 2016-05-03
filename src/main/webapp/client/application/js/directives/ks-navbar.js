@@ -23,6 +23,8 @@
         vm.isAuthorized = isAuthorized;
         vm.signOut = signOut;
         vm.goToCreateProject = goToCreateProject;
+        vm.isAdmin = isAdmin;
+        vm.goToUnapprovedProjects = goToUnapprovedProjects;
         vm.user = null;
         vm.appRoles = appUser.ROLES;
 
@@ -46,6 +48,10 @@
             $state.go(appStates.CREATE_PROJECT);
         }
 
+        function goToUnapprovedProjects(){
+            $state.go(appStates.UNAPPROVED_PROJECTS);
+        }
+
         function signOut(){
             authService.logoff();
             goToHome();
@@ -53,7 +59,12 @@
 
         function isAuthorized(){
             vm.user = authService.getUserInfo();
+            console.log(vm.user);
             return vm.user;
+        }
+
+        function isAdmin(){
+            return authService.isAdmin();
         }
     }
 })();
