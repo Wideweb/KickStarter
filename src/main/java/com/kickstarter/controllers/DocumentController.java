@@ -3,6 +3,7 @@ package com.kickstarter.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.kickstarter.logic.domain.Project;
 import com.kickstarter.logic.services.IProjectService;
 import com.kickstarter.models.ProjectModel;
 import org.springframework.stereotype.Controller;
@@ -26,9 +27,15 @@ public class DocumentController {
         return new ModelAndView("pdfView", "project", project);
     }
 
-    @RequestMapping(value = "/downloadExcel", method = RequestMethod.GET)
+    @RequestMapping(value = "document/downloadProjectsStatistic", method = RequestMethod.GET)
     public ModelAndView downloadExcel() {
-        List<User> listProject = new ArrayList<User>();
+        List<Project> listProject = projectService.getFinished();
         return new ModelAndView("excelView", "projectList", listProject);
+    }
+
+    @RequestMapping(value = "document/downloadApprovingStatistic", method = RequestMethod.GET)
+    public ModelAndView downloadApprovingStatisticExcel() {
+        List<Project> listProject = projectService.getAll();
+        return new ModelAndView("approvingStatisticExcelView", "projectList", listProject);
     }
 }

@@ -81,6 +81,14 @@
                         url: "/discover",
                         templateUrl: appSettings.pagesFolderPath + "discover.html",
                         controller: "DiscoverController"
+                    })
+                    .state(appStates.UNAPPROVED_PROJECTS, {
+                        url: "/unapproved-projects",
+                        templateUrl: appSettings.pagesFolderPath + "unapproved_projects.html",
+                        controller: "UnapprovedProjectsController",
+                        //data:{
+                        //    authenticate: true
+                        //}
                     });
             }
         ]);

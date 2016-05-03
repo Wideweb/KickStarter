@@ -24,6 +24,7 @@
                     <label translate>PROJECT_CALLED</label>
                 </div>
             </div>
+
             <div class="form-group"
                  ng-class="{ 'has-error': vm.projectForm.name.$touched && vm.projectForm.name.$invalid }">
                 <div class="flex-container">
@@ -74,6 +75,29 @@
                                ng-model="vm.project.fundingGoal"/>
                         <div class="input-group-addon">$</div>
                     </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="flex-container">
+                    <div class="reward-container" ng-repeat="reward in vm.project.rewards">
+                        <div class="col-sm-10 col-xs-11 text-box-container">
+                            <input placeholder="amount..."
+                                   id="reward-amount-{{ $index + 1 }}"
+                                   name="reward_amount_{{ $index + 1 }}"
+
+                                   class="form-control"
+                                   ng-model="reward.amount"/>
+                        </div>
+                        <hr>
+                        <div class="col-sm-10 col-xs-11 text-box-container">
+                            <input placeholder="description..."
+                                   id="reward-description-{{ $index + 1 }}"
+                                   name="reward_description_{{ $index + 1 }}"
+                                   class="form-control"
+                                   ng-model="reward.description"/>
+                        </div>
+                    </div>
+                    <input type="button" class="btn btn-info col-sm-4" ng-click="vm.addReward()" value="Add reward">
                 </div>
             </div>
             <div class="form-group"

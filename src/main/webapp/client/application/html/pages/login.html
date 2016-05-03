@@ -1,27 +1,47 @@
 <div class="container">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-                <h2 translate>LOG_IN</h2>
-                <div class="server-errors">
-                    <span class="error-text">{{ vm.serverError }}</span>
+        <div class="col-sm-offset-3 col-sm-6" id="user-account-form">
+            <div class="server-errors">
+                <span class="error-text">{{ vm.serverError }}</span>
+            </div>
+            <div class="rounded-content-frame rounded-content-frame--white">
+                <div class="rounded-content-frame__content" id="login">
+                    <h2 class="title">
+                        Log in
+                    </h2>
+                    <div class="mb2">
+                        <form name="vm.userForm" class="form-horizontal" novalidate role="form">
+                            <fieldset class="mb1">
+                                <ol>
+                                    <li class="mb2">
+                                        <label class="offscreen" for="username">Username</label>
+                                        <input ng-model="vm.user.username" type="text" class="form-control input-text full-width js-auto_focus email"
+                                               name="username" id="username" required ng-maxlength="50" autocapitalize="off" autocorrect="off"
+                                               autofocus="autofocus" input-reference="vm.userForm.username" placeholder="username"/>
+                                    </li>
+                                    <li class="mb2 relative">
+                                        <label class="offscreen" for="password">Password</label>
+                                        <div class="relative">
+                                                <input ng-model="vm.user.password" type="password" class="form-control input-text full-width js-auto_focus password"
+                                                       name="password" id="password" required ng-maxlength="50" input-reference="vm.userForm.password" placeholder="password"/>
+                                        </div>
+                                    </li>
+                                    <li class="clearfix">
+                                        <input class="btn btn--green btn--block submit" ng-disabled="vm.isSubmitting"
+                                               ng-click="vm.login(vm.user)" translate name="commit" value="Log me in!" type="submit">
+                                    </li>
+                                </ol>
+                            </fieldset>
+                        </form>
+
+
+                    </div>
                 </div>
-                <form name="vm.userForm" class="form-horizontal" novalidate role="form">
-
-                        <input-wrapper input-reference="vm.userForm.username" label="Name">
-                            <input ng-model="vm.user.username" type="text" class="form-control" name="username"
-                                       required ng-maxlength="50" />
-                        </input-wrapper>
-
-                        <input-wrapper input-reference="vm.userForm.password" label="Password">
-                            <input ng-model="vm.user.password" type="password" class="form-control" name="password"
-                                       required ng-maxlength="50" />
-                        </input-wrapper>
-
-                    <button type="submit" 
-                            class="btn btn-primary" 
-                            ng-disabled="vm.isSubmitting" 
-                            ng-click="vm.login(vm.user)" translate>OK</button>
-                </form>
+                <div class="rounded-content-frame__footer">
+                    New to Kickstarter?
+                    <a href="javascript:void(0)" class="bold" ng-click="vm.goToRegister()">Sign up!</a>
+                </div>
+            </div>
         </div>
     </div>
 </div>

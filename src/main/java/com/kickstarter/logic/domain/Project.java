@@ -11,16 +11,15 @@ public class Project extends EntityBase {
     private ProjectType projectType;
     private String description;
     private Date startDate;
+    private Date endDate;
     private Integer fundingGoal;
     private Integer fundingDuration;
     private List<Reward> rewards;
+    private Boolean isApproved;
 
     public Project(){
         rewards = new ArrayList<Reward>();
     }
-
-    private Integer pledged;
-    private Integer daysToGo;
 
     public String getName() {
         return name;
@@ -86,21 +85,34 @@ public class Project extends EntityBase {
         this.fundingDuration = fundingDuration;
     }
 
+    /*
     public Integer getDaysToGo() {
         long diff = new Date().getTime() - getStartDate().getTime();
         int daysToGo = getFundingDuration() - (int)diff / (24 * 60 * 60 * 1000);
         return daysToGo;
     }
-
-    public Integer getPledged() {
-        return 36;
-    }
-    
+    */
     public List<Reward> getRewards() {
         return rewards;
     }
 
     public void setRewards(List<Reward> rewards) {
         this.rewards = rewards;
+    }
+
+    public Boolean getApproved() {
+        return isApproved;
+    }
+
+    public void setApproved(Boolean approved) {
+        isApproved = approved;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
     }
 }

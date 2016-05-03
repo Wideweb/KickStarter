@@ -13,10 +13,21 @@
             getAll: getAll,
             donateToProject: donateToProject,
             getAllByCategory: getAllByCategory,
+            getUnapprovedProjects: getUnapprovedProjects,
+            approveProject: approveProject,
+            rejectProject: rejectProject,
         };
 
         function saveProject(project){
-            return $http.post(urls.PROJECT_SAVE, project);
+            //return //$http.post(urls.PROJECT_SAVE, project);
+            return $http({
+                url: urls.PROJECT_SAVE,
+                dataType: 'json',
+                method: 'POST',
+                data: project,
+                headers: {
+                "Content-Type": "application/json"}
+            });
         }
 
         function getProject(projectId){
@@ -41,6 +52,18 @@
         
         function getAllByCategory(categoryId) {
             return $http.get(urls.PROJECTS_BY_CATEGORY + categoryId);
+        }
+
+        function getUnapprovedProjects() {
+            return $http.get(urls.UNAPPROVED_PROJECTS);
+        }
+
+        function approveProject(projectId) {
+            return $http.get(urls.APPROVE_PROJECT + projectId);
+        }
+
+        function rejectProject(projectId) {
+            return $http.get(urls.REJECT_PROJECT + projectId);
         }
     }
 })();

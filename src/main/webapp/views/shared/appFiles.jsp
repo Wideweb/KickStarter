@@ -63,6 +63,9 @@
     <spring:url value="/client/application/js/controllers/ProjectsByCategoryController.js" var="appProjectsByCategoryControllerJs" />
     <script src="${appProjectsByCategoryControllerJs}"></script>
 
+    <spring:url value="/client/application/js/controllers/UnapprovedProjectsController.js" var="appUnapprovedProjectsControllerJs" />
+    <script src="${appUnapprovedProjectsControllerJs}"></script>
+
     <spring:url value="/client/application/js/directives/custom-forms.js" var="appCustomFormsDirectiveJs" />
     <script src="${appCustomFormsDirectiveJs}"></script>
 

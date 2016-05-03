@@ -14,6 +14,7 @@
         vm.isSubmitting = false;
         vm.serverError = "";
         vm.login = login;
+        vm.goToRegister = goToRegister;
 
         function login(user) {
             vm.serverError = "";
@@ -48,6 +49,10 @@
             }
         }
 
+        function goToRegister() {
+            $state.go(appStates.REGISTER);
+        }
+        
         function onLoginFailed(error){
             vm.serverError = error.statusText;
             vm.isSubmitting = false;

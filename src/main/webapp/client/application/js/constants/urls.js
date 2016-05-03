@@ -15,8 +15,13 @@
         USER_PROJECTS:  serverPath + 'project/getUserProjects',
         DONATE_TO_PROJECT:  serverPath + 'project/donate',
         DOWNLOAD_PROJECT_PDF: serverPath + 'document/downloadProjectPDF/',
+        DOWNLOAD_PROJECTS_STATISTIC: serverPath + 'document/downloadProjectsStatistic',
+        DOWNLOAD_PROVING_STATISTIC: serverPath + 'document/downloadApprovingStatistic',
         CATEGORIES_GET_ALL: serverPath + 'projectType/getAll',
-        PROJECTS_BY_CATEGORY: serverPath + 'project/getAll/'
+        PROJECTS_BY_CATEGORY: serverPath + 'project/getAll/',
+        UNAPPROVED_PROJECTS: serverPath + 'project/getUnapproved',
+        APPROVE_PROJECT: serverPath + 'project/approve/',
+        REJECT_PROJECT: serverPath + 'project/reject/'
     };
 
     angular.module("app.constants")

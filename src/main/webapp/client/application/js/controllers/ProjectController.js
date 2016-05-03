@@ -4,10 +4,10 @@
     angular
         .module('app')
         .controller("ProjectController",
-            ["projectService", "documentService", "$state", "$scope", "appStates", ProjectController]);
+            ["projectService", "documentService", "authService", "$state", "$scope", "appStates", ProjectController]);
 
 
-    function ProjectController(projectService, documentService, $state, $scope, appStates) {
+    function ProjectController(projectService, documentService, authService, $state, $scope, appStates) {
         $scope.project = {};
         $scope.serverError = "";
 
@@ -24,14 +24,35 @@
                 })
         }
 
+        $scope.approve = function () {
+            console.log(projectId);
+            projectService.approveProject(projectId)
+                .then(function(res) {
+                    $state.go(appStates.UNAPPROVED_PROJECTS);
+                }, function(err) {
+                    console.log(err);
+                })
+        };
+
+        $scope.reject = function () {
+            projectService.rejectProject(projectId)
+                .then(function(res) {
+                    $state.go(appStates.UNAPPROVED_PROJECTS);
+                })
+        };
+
         $scope.downloadProjectPDF = function(projectId) {
             documentService.downloadProjectPDF(projectId);
-        }
+        };
 
         $scope.backThisProject = function(){
             $state.go(appStates.DONATE_TO_PROJECT, {
                 projectId: $state.params.projectId
             });
+        };
+
+        $scope.isAdmin = function() {
+            return authService.isAdmin();
         }
     }
 })();

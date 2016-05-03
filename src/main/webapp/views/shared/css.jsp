@@ -14,3 +14,8 @@
 
 <spring:url value="/client/components/ui-select/dist/select.css" var="uiSelectCss" />
 <link href="${uiSelectCss}" rel="stylesheet"/>
+
+<spring:url value="/client/components/ks.css" var="ksCss" />
+<link href="${ksCss}" rel="stylesheet"/>
+
+

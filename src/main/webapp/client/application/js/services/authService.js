@@ -60,6 +60,14 @@
             },
             isAuthenticated: function(){
                 return userInfo !== null && userInfo !== undefined;
+            },
+            isAdmin: function() {
+                if (userInfo !== null && userInfo !== undefined
+                    && userInfo.role.roleName === 'Administrator') {
+                    return true;
+                } else {
+                    return false;
+                }
             }
         };
     }
