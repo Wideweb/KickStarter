@@ -16,7 +16,8 @@
         "ngMessages",
         "ngSanitize",
         "ui.select",
-        "pascalprecht.translate"
+        "pascalprecht.translate",
+        "toastr"
     ]);
 
     angular.module("app.constants", []);

@@ -118,7 +118,7 @@ public class ProjectService implements IProjectService {
         donation.setProject(projectRepository.getById(model.getProjectId()));
         donation.setUser(userService.getUserByName(userName));
         donation.setAmount(model.getAmount());
-        if(model.getRewardId() >= 0){
+        if(model.getRewardId() != null && model.getRewardId() >= 0){
             donation.setReward(rewardRepository.getById(model.getRewardId()));
         }
         donationRepository.add(donation);
