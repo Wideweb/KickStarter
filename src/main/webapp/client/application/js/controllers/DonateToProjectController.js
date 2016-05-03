@@ -4,10 +4,10 @@
     angular
         .module('app')
         .controller("DonateToProjectController", 
-            ["urls", "projectService", "appStates", "$state", "modalService", DonateToProjectController]);
+            ["urls", "projectService", "appStates", "$state", "modalService", "toastr", DonateToProjectController]);
 
 
-    function DonateToProjectController(urls, projectService, appStates, $state, modalService) {
+    function DonateToProjectController(urls, projectService, appStates, $state, modalService, toastr) {
         var vm = this;
 
         vm.simpleDonateActivated = false;
@@ -26,6 +26,7 @@
         activate();
 
         function activate(){
+            vm.donation.projectId = $state.params.projectId;  
             fetchProject();
         }
 
@@ -52,12 +53,14 @@
 
             modal.result.then(function(){
                 projectService.donateToProject(vm.donation)
+                .then(onDonationSuccess)
                 .catch(onRequestFailed);
             });
         }
 
         function onRequestFailed(error){
             vm.serverError = error.statusText;
+            onDonationError();
         }
 
         function activateSimpleDonate(){
@@ -84,6 +87,14 @@
 
         function isRewardActivatedAt(index){
             return vm.donation.rewardId === index;
+        }
+
+        function onDonationSuccess(){
+            toastr.success('Your donation has been accepted', 'Success');
+        }
+
+        function onDonationError(){
+            toastr.error('Your donation was rejected', 'Error');
         }
     }
 })();

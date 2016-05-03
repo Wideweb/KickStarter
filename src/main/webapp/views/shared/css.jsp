@@ -18,4 +18,7 @@
 <spring:url value="/client/components/ks.css" var="ksCss" />
 <link href="${ksCss}" rel="stylesheet"/>
 
+<spring:url value="/client/components/angular-toastr/angular-toastr.css" var="angularToastrCss" />
+<link href="${angularToastrCss}" rel="stylesheet"/>
+
 

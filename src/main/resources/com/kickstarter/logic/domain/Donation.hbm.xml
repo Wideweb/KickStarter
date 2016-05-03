@@ -15,10 +15,10 @@
             <column name="Project" not-null="true"/>
         </many-to-one>
         <many-to-one name="user" class="com.kickstarter.logic.domain.User" fetch="join">
-            <column name="User" not-null="true"/>
+            <column name="AppUser" not-null="true"/>
         </many-to-one>
         <many-to-one name="reward" class="com.kickstarter.logic.domain.Reward" fetch="join">
-            <column name="Reward" not-null="false"/>
+            <column name="Reward"/>
         </many-to-one>
     </class>
 </hibernate-mapping>
