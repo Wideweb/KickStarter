@@ -16,6 +16,7 @@
                 templateUrl: appSettings.templatesFolderPath + "confirmationModal.html",
                 controller: 'confirmationModalCtrl',
                 windowClass: 'confirmation-modal',
+                controllerAs: "vm",
                 resolve: {
                     translateKey: function () { return params.translateKey; },
                     translateValues: function () { return params.translateValues; }

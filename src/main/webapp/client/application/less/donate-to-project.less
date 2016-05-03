@@ -1,13 +1,142 @@
 .donate-to-project-container{
 
+	.project-header-wrapper{
+		height: 120px;
+		margin-bottom: 60px;
+
+		.project-header{
+			position: absolute;
+			width: 100%;
+			left: 0px;
+			right: 0px;
+			background-color: RGBA(180,205,205,0.15);
+			border-top: 1px solid;
+			border-bottom: 1px solid;
+			border-color: #ddd;
+			padding-top: 10px;
+    		padding-bottom: 20px;
+		}
+	}
+
+	.rewards-header{
+		font-size: 22px;
+	    font-weight: normal;
+	    margin-bottom: 20px;
+	    line-height: 40px;
+	}
+
+	.row.rewards-row{
+	    padding-right: 30px;
+	}
+
+	.container.odd-container{
+		.container.information-note-container{
+			padding: 10px;
+			border: none;
+    		border-radius: 6px;
+    		background: #E8F6FF;
+
+			.row.information-note-header-row{
+				font-size: 16px;
+				font-weight: bold;
+				color: #000;
+			}
+
+			.row.information-note-sub-header-row{
+				font-size: 14px;
+    			font-weight: normal;
+			}
+
+			.row.information-note-message-row{
+				font-size: 12px;
+			    line-height: 18px;
+			    padding-top: 8px;
+			    margin-bottom: 5px;
+			    text-align: justify;
+			}
+		}
+	}
+
+	.container.rewars-container{
+		padding-left: 60px;
+	}
+
 	.container.reward-container{
-		padding: 30px;
+		margin-top: 10px;
+    	margin-bottom: 10px;
+		transition: all .2s ease-in-out; 
+		padding: 20px 20px 20px 0;
 		background-color: RGBA(180,205,205,0.15);
+		border: 0px solid RGBA(180,205,205,0.15);
+
+		.reward-description{
+			.text-bold{
+				font-weight: bold;
+				margin-bottom: 5px;
+			}
+
+			word-wrap: break-word;
+		}
 
 		&.choosen-reward{
 		    border: 1px solid;
 		    border-radius: 5px;
-		    border-color: #ccc;
+		    border-color: #ddd;
+		    transform: scale(1.06); 
+
+		    .row.divider-row{
+	    	    padding-left: 90px;
+				padding-right: 20px;
+		  
+			    .dashed-divider{
+			    	width: 100%;
+			    	display: inline-block;
+			   		margin-bottom: 0px;
+				    margin-top: 20px;
+				    border-bottom: 1px dashed;
+				    border-color: #aaa;
+				    padding-left: 70px;
+			   	}
+		   	}
 	    }	
+
+	    &.grow { 
+	   		transition: all .2s ease-in-out; 
+	   		
+	   		&:hover { 
+	   			transform: scale(1.06);
+	   		}
+	   	}
+
+	   	.form-group{
+	   		padding-left: 70px;
+
+
+		   	label.control-label {
+		   		margin-bottom: 5px;
+	    		color: #828587;
+	    		font-weight: normal;
+	   		}
+
+	   		.donate-btn{
+	   			height: 40px;
+	   			float: right;
+	   			width: 100%;
+	   			margin-bottom: 10px;
+	   		}
+
+	   		input.form-control{
+	   			margin-bottom: 10px;
+	   			height: 40px;
+	   			line-height: 20px;
+    			box-sizing: border-box;
+    			font-size: 16px;
+    			font-weight: bold;
+    			padding: 10px 40px 10px 10px;
+    			border-radius: 6px;
+    			border: 1px solid #D9D9DE;
+    			width: 100%;
+	   		}
+	   	}
 	}
 }
