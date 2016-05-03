@@ -8,7 +8,7 @@
         <h1 translate>THERE_ARE_NO_PROJECTS_IN_THE_SYSTEM</h1>
     </div>
     <div ng-if="vm.hasProjects()" class="row">
-        <div ng-repeat="project in vm.projects track by project.id">
+        <div class="project-container" ng-repeat="project in vm.projects track by project.id">
             <div class="project-list-item" ui-sref="{{ vm.states.PROJECT }}({ projectId: project.id })">
                 <span class="header">{{ project.name }}</span>
                 <span class="header-annotation">by {{ project.owner.username }}</span>
