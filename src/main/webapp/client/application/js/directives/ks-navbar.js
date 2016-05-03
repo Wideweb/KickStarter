@@ -59,7 +59,6 @@
 
         function isAuthorized(){
             vm.user = authService.getUserInfo();
-            console.log(vm.user);
             return vm.user;
         }
 

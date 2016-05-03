@@ -10,6 +10,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.transform.AliasToBeanResultTransformer;
 
@@ -77,6 +78,7 @@ public class ProjectService implements IProjectService {
         Project project = projectRepository.getById(projectId);
         long diff = new Date().getTime() - project.getStartDate().getTime();
         int daysToGo = project.getFundingDuration() - (int)diff / (24 * 60 * 60 * 1000);
+        //long backers = session.createCriteria("Book").setProjection(Projections.rowCount()).uniqueResult();
         ProjectModel projectModel = new ProjectModel();
         projectModel.setId(project.getId());
         projectModel.setName(project.getName());
@@ -158,6 +160,16 @@ public class ProjectService implements IProjectService {
     }
 
     public List<Project> getProjectsForApproving(){
+        Session session = sessionFactory.openSession();
+        return (List<Project>) session
+                .createCriteria(Project.class)
+                .add(Restrictions.eq("approved", true))
+                .add(Restrictions.lt("endDate", new Date()))
+                .list();
+    }
+
+    @Override
+    public List<Project> getFinished() {
         Session session = sessionFactory.openSession();
         return (List<Project>) session
                 .createCriteria(Project.class)

@@ -15,6 +15,7 @@ public interface IProjectService {
     List<Project> getAllByCategory(Integer categoryId);
     List<Project> getActive();
     List<Project> getProjectsForApproving();
+    List<Project> getFinished();
     void approveProject(Integer projectId);
     void rejectProject(Integer projectId);
 }
