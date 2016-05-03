@@ -52,8 +52,8 @@
                 <value>com/kickstarter/logic/domain/Project.hbm.xml</value>
                 <value>com/kickstarter/logic/domain/ProjectType.hbm.xml</value>
                 <value>com/kickstarter/logic/domain/Country.hbm.xml</value>
-                <value>com/kickstarter/logic/domain/Donation.hbm.xml</value>
                 <value>com/kickstarter/logic/domain/Reward.hbm.xml</value>
+                <value>com/kickstarter/logic/domain/Donation.hbm.xml</value>
             </list>
         </property>
 

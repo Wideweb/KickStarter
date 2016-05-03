@@ -9,8 +9,8 @@
 
     function DonateToProjectController(urls, projectService, appStates, $state, modalService) {
         var vm = this;
-        var simpleDonateActivated = false;
 
+        vm.simpleDonateActivated = false;
         vm.urls = urls;
         vm.project = {};
         vm.rewards = [];
@@ -45,7 +45,7 @@
             var modal = modalService.showConfirmationModal({
                 translateKey: 'ARE_YOU_SURE_YOU_WANT_TO_DOANTE_TO_PROJECT',
                 translateValues: {
-                    projectName: vm.project.Name,
+                    projectName: vm.project.name,
                     amount: vm.donation.amount
                 }
             });
@@ -61,19 +61,25 @@
         }
 
         function activateSimpleDonate(){
+            if(vm.simpleDonateActivated === true){
+                return;
+            }
             vm.donation.rewardId = null;
-            simpleDonateActivated = true;
+            vm.simpleDonateActivated = true;
             vm.donation.amount = 1;
         }
 
         function activateRewardAt(index){
-            simpleDonateActivated = false;
+            if(vm.donation.rewardId === index){
+                return;
+            }
+            vm.simpleDonateActivated = false;
             vm.donation.rewardId = index;
-            vm.donation.amount = vm.rewards[i].amount;
+            vm.donation.amount = vm.rewards[index].amount;
         }
 
-        function isSimpleDonateActivated(index){
-            return simpleDonateActivated;
+        function isSimpleDonateActivated(){
+            return vm.simpleDonateActivated;
         }
 
         function isRewardActivatedAt(index){
