@@ -14,7 +14,7 @@
         <property name="description" type="java.lang.String">
             <column name="Description" not-null="true"/>
         </property>
-        <many-to-one name="project" class="com.kickstarter.logic.domain.Project">
+        <many-to-one name="project" class="com.kickstarter.logic.domain.Project" fetch="join">
             <column name="Project" not-null="true"/>
         </many-to-one>
     </class>

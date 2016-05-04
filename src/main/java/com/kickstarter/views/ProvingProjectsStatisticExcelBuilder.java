@@ -1,6 +1,7 @@
 package com.kickstarter.views;
 
 import com.kickstarter.logic.domain.Project;
+import com.kickstarter.models.ProjectModel;
 import org.apache.poi.hssf.usermodel.HSSFFont;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
@@ -23,7 +24,7 @@ public class ProvingProjectsStatisticExcelBuilder extends AbstractExcelView {
                                       HSSFWorkbook workbook, HttpServletRequest request, HttpServletResponse response)
             throws Exception {
 
-        List<Project> projects = (List<Project>) model.get("projectList");
+        List<ProjectModel> projects = (List<ProjectModel>) model.get("projectList");
 
         // create a new Excel sheet
         HSSFSheet sheet = workbook.createSheet("Some Sheet");
@@ -73,7 +74,7 @@ public class ProvingProjectsStatisticExcelBuilder extends AbstractExcelView {
 
         int rowCount = 1;
 
-        for (Project project : projects) {
+        for (ProjectModel project : projects) {
             HSSFRow row = sheet.createRow(rowCount);
             row.createCell(0).setCellValue(project.getName());
 

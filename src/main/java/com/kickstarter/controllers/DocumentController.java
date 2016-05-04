@@ -29,13 +29,13 @@ public class DocumentController {
 
     @RequestMapping(value = "document/downloadProjectsStatistic", method = RequestMethod.GET)
     public ModelAndView downloadExcel() {
-        List<Project> listProject = projectService.getFinished();
+        List<ProjectModel> listProject = projectService.getFinished();
         return new ModelAndView("excelView", "projectList", listProject);
     }
 
     @RequestMapping(value = "document/downloadApprovingStatistic", method = RequestMethod.GET)
     public ModelAndView downloadApprovingStatisticExcel() {
-        List<Project> listProject = projectService.getAll();
+        List<ProjectModel> listProject = projectService.getAll();
         return new ModelAndView("approvingStatisticExcelView", "projectList", listProject);
     }
 }

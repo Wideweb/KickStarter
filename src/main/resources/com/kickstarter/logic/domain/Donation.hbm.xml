@@ -11,7 +11,7 @@
         <property name="amount" type="java.lang.Integer">
             <column name="Amount" not-null="true"/>
         </property>
-        <many-to-one name="project" class="com.kickstarter.logic.domain.Project">
+        <many-to-one name="project" class="com.kickstarter.logic.domain.Project" fetch="join">
             <column name="Project" not-null="true"/>
         </many-to-one>
         <many-to-one name="user" class="com.kickstarter.logic.domain.User" fetch="join">

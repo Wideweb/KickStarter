@@ -14,7 +14,7 @@
         <div class="project-container" ng-repeat="project in vm.projects track by project.id">
             <div class="project-list-item" ui-sref="{{ vm.states.PROJECT }}({ projectId: project.id })">
                 <span class="header">{{ project.name }}</span>
-                <span class="header-annotation">by {{ project.owner.username }}</span>
+                <span class="header-annotation">by {{ project.owner }}</span>
                 <div class="description">
                     <p>{{ project.description | limitTo: 250}}...</p>
                 </div>

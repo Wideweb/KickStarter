@@ -81,27 +81,7 @@ public class ProjectService implements IProjectService {
     }
 
     public ProjectModel get(Integer projectId){
-        Project project = projectRepository.getById(projectId);
-        long diff = new Date().getTime() - project.getStartDate().getTime();
-        int daysToGo = project.getFundingDuration() - (int)diff / (24 * 60 * 60 * 1000);
-        //long backers = session.createCriteria("Book").setProjection(Projections.rowCount()).uniqueResult();
-        ProjectModel projectModel = new ProjectModel();
-        projectModel.setId(project.getId());
-        projectModel.setName(project.getName());
-        projectModel.setOwner(project.getOwner().getUsername());
-        projectModel.setCountryId(project.getCountry().getId());
-        projectModel.setProjectTypeId(project.getProjectType().getId());
-        projectModel.setDescription(project.getDescription());
-        projectModel.setDaysToGo(daysToGo);
-        projectModel.setBackers(0);
-        projectModel.setPledged(0);
-        projectModel.setFundingGoal(project.getFundingGoal());
-        projectModel.setFundingDuration(project.getFundingDuration());
-
-        projectModel.setRewards(rewardService.getRewardsByProjectId(projectId));
-        projectModel.setDonations(donationService.getDonationsByProjectId(projectId));
-
-        return projectModel;
+        return mapProjectToModel(projectRepository.getById(projectId));
     }
 
     public void approveProject(Integer projectId) {
@@ -137,43 +117,53 @@ public class ProjectService implements IProjectService {
         }
     }
 
-    public List<Project> getUserProjects(String userName){
+    public List<ProjectModel> getUserProjects(String userName){
         return projectRepository
                 .getAll()
                 .stream()
                 .filter((Project p) -> p.getOwner().getUsername().equalsIgnoreCase(userName))
+                .map(this::mapProjectToModel)
                 .collect(Collectors.toList());
     }
 
-    public List<Project> getAll(){
-        return projectRepository.getAll();
+    public List<ProjectModel> getAll(){
+        return projectRepository
+                .getAll()
+                .stream()
+                .map(this::mapProjectToModel)
+                .collect(Collectors.toList());
     }
 
-    public List<Project> getActive(){
-        Session session = sessionFactory.openSession();
-        return (List<Project>) session
-                .createCriteria(Project.class)
-                .add(Restrictions.eq("approved", true))
-                .add(Restrictions.ge("endDate", new Date()))
-                .list();
+    public List<ProjectModel> getActive(){
+        return projectRepository
+                .getAll()
+                .stream()
+                .filter((Project p) -> p.getApproved() != null
+                        && p.getApproved() == true
+                        && p.getEndDate().getTime() > new Date().getTime())
+                .map(this::mapProjectToModel)
+                .collect(Collectors.toList());
     }
 
-    public List<Project> getProjectsForApproving(){
-        Session session = sessionFactory.openSession();
-        return (List<Project>) session
-                .createCriteria(Project.class)
-                .add(Restrictions.isNull("approved"))
-                .list();
+    public List<ProjectModel> getProjectsForApproving(){
+        return projectRepository
+                .getAll()
+                .stream()
+                .filter((Project p) -> p.getApproved() == null)
+                .map(this::mapProjectToModel)
+                .collect(Collectors.toList());
     }
 
     @Override
-    public List<Project> getFinished() {
-        Session session = sessionFactory.openSession();
-        return (List<Project>) session
-                .createCriteria(Project.class)
-                .add(Restrictions.eq("approved", true))
-                .add(Restrictions.lt("endDate", new Date()))
-                .list();
+    public List<ProjectModel> getFinished() {
+        return projectRepository
+                .getAll()
+                .stream()
+                .filter((Project p) -> p.getApproved() != null
+                        && p.getApproved() == true
+                        && p.getEndDate().getTime() < new Date().getTime())
+                .map(this::mapProjectToModel)
+                .collect(Collectors.toList());
     }
 
     public void donateToProject(DonationModel model, String userName){
@@ -187,13 +177,49 @@ public class ProjectService implements IProjectService {
         donationRepository.add(donation);
     }
     
-    public List<Project> getAllByCategory(Integer categoryId){
-        Session session = sessionFactory.openSession();
-        return (List<Project>) session
-                .createCriteria(Project.class)
-                .add(Restrictions.eq("approved", true))
-                .add(Restrictions.ge("endDate", new Date()))
-                .add(Restrictions.eq("projectType.id", categoryId))
-                .list();
+    public List<ProjectModel> getAllByCategory(Integer categoryId) {
+        return projectRepository
+                .getAll()
+                .stream()
+                .filter((Project p) -> p.getApproved() != null
+                        && p.getApproved() == true
+                        && p.getEndDate().getTime() >= new Date().getTime()
+                        && p.getProjectType().getId() == categoryId)
+                .map(this::mapProjectToModel)
+                .collect(Collectors.toList());
+    }
+
+    private ProjectModel mapProjectToModel(Project project){
+        ProjectModel projectModel = new ProjectModel();
+        projectModel.setId(project.getId());
+        projectModel.setDonations(donationService.getDonationsByProjectId(project.getId()));
+        projectModel.setRewards(rewardService.getRewardsByProjectId(project.getId()));
+        projectModel.setDescription(project.getDescription());
+        projectModel.setApproved(project.getApproved());
+        projectModel.setBackers(projectModel.getDonations().size());
+        projectModel.setCountryId(project.getCountry().getId());
+        projectModel.setDaysToGo(GetDaysToGo(project));
+        projectModel.setFundingDuration(project.getFundingDuration());
+        projectModel.setFundingGoal(project.getFundingGoal());
+        projectModel.setName(project.getName());
+        projectModel.setOwner(project.getOwner().getUsername());
+        projectModel.setPledged(CountPledged(projectModel.getDonations()));
+        projectModel.setProjectTypeId(project.getProjectType().getId());
+
+        return projectModel;
+    }
+
+    private int GetDaysToGo(Project project){
+        long diff = new Date().getTime() - project.getStartDate().getTime();
+        return project.getFundingDuration() - (int)diff / (24 * 60 * 60 * 1000);
+    }
+
+    private int CountPledged(List<DonationModel> donations){
+        Integer pledged = 0;
+        for(int i = 0; i < donations.size(); i++){
+            pledged += donations.get(i).getAmount();
+        }
+
+        return pledged;
     }
 }

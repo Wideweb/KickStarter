@@ -25,6 +25,7 @@
         CONTINUE: 'Continue',
         CONFIRM: 'Confirm',
         CANCEL: 'Cancel',
+        BACK: 'Back',
     };
 
     angular

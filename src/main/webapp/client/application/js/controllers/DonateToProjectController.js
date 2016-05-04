@@ -22,6 +22,7 @@
         vm.activateRewardAt = activateRewardAt;
         vm.isSimpleDonateActivated = isSimpleDonateActivated;
         vm.isRewardActivatedAt = isRewardActivatedAt;
+        vm.back = back;
 
         activate();
 
@@ -95,6 +96,12 @@
 
         function onDonationError(){
             toastr.error('Your donation was rejected', 'Error');
+        }
+
+        function back(){
+            $state.go(appStates.PROJECT, {
+                projectId: $state.params.projectId
+            });
         }
     }
 })();

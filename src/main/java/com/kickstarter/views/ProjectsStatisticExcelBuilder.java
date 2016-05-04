@@ -25,7 +25,7 @@ public class ProjectsStatisticExcelBuilder extends AbstractExcelView {
                                       HSSFWorkbook workbook, HttpServletRequest request, HttpServletResponse response)
             throws Exception {
 
-        List<Project> projects = (List<Project>) model.get("projectList");
+        List<ProjectModel> projects = (List<ProjectModel>) model.get("projectList");
 
         // create a new Excel sheet
         HSSFSheet sheet = workbook.createSheet("Some Sheet");
@@ -78,7 +78,7 @@ public class ProjectsStatisticExcelBuilder extends AbstractExcelView {
 
         int rowCount = 1;
 
-        for (Project project : projects) {
+        for (ProjectModel project : projects) {
             HSSFRow row = sheet.createRow(rowCount);
 
             row.createCell(0).setCellValue(project.getName());
