@@ -38,7 +38,7 @@
         <many-to-one name="owner" class="com.kickstarter.logic.domain.User" fetch="join">
             <column name="owner" not-null="true"/>
         </many-to-one>
-        <list name="rewards" cascade="all" lazy="false" fetch="join">
+        <list name="rewards" cascade="all" lazy="false">
             <key column="Project"/>
             <list-index base="0"/>
             <one-to-many class="com.kickstarter.logic.domain.Reward"/>

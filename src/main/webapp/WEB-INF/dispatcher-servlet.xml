@@ -116,4 +116,8 @@
     <bean id="projectService" class="com.kickstarter.logic.services.ProjectService"/>
 
     <bean id="projectTypeService" class="com.kickstarter.logic.services.ProjectTypeService"/>
+
+    <bean id="rewardService" class="com.kickstarter.logic.services.RewardService"/>
+
+    <bean id="donationService" class="com.kickstarter.logic.services.DonationService"/>
 </beans>

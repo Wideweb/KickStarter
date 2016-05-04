@@ -19,6 +19,7 @@ public class ProjectModel {
     private Integer fundingDuration;
     private Boolean isApproved;
     private List<RewardModel> rewards;
+    private List<DonationModel> donations;
 
     public ProjectModel(){
         rewards = new ArrayList<RewardModel>();
@@ -126,5 +127,13 @@ public class ProjectModel {
 
     public void setApproved(Boolean approved) {
         isApproved = approved;
+    }
+
+    public List<DonationModel> getDonations() {
+        return donations;
+    }
+
+    public void setDonations(List<DonationModel> donations) {
+        this.donations = donations;
     }
 }
