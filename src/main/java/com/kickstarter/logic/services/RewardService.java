@@ -18,16 +18,16 @@ public class RewardService implements IRewardService{
                 .getAll()
                 .stream()
                 .filter(r -> r.getProject().getId().equals(projectId))
-                .map(this::MapRewardToModel)
+                .map(r -> MapRewardToModel(r, projectId))
                 .collect(Collectors.toList());
     }
 
-    private RewardModel MapRewardToModel(Reward reward){
+    private RewardModel MapRewardToModel(Reward reward, Integer projectId){
         RewardModel rewardModel = new RewardModel();
         rewardModel.setId(reward.getId());
         rewardModel.setAmount(reward.getAmount());
         rewardModel.setDescription(reward.getDescription());
-        rewardModel.setProjectId(reward.getProject().getId());
+        rewardModel.setProjectId(projectId);
 
         return rewardModel;
     }

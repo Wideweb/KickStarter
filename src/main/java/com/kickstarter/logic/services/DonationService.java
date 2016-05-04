@@ -18,18 +18,18 @@ public class DonationService implements IDonationService {
                 .getAll()
                 .stream()
                 .filter(d -> d.getProject().getId().equals(projectId))
-                .map(this::MapDonationToModel)
+                .map(d -> MapDonationToModel(d, projectId))
                 .collect(Collectors.toList());
     }
 
-    private DonationModel MapDonationToModel(Donation donation){
+    private DonationModel MapDonationToModel(Donation donation, Integer projectId){
         DonationModel donationModel = new DonationModel();
         donationModel.setId(donation.getId());
         donationModel.setAmount(donation.getAmount());
         if(donation.getReward() != null){
             donationModel.setRewardId(donation.getReward().getId());
         }
-        donationModel.setProjectId(donation.getProject().getId());
+        donationModel.setProjectId(projectId);
 
         return donationModel;
     }
