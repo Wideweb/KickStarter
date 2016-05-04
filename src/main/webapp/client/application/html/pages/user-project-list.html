@@ -11,8 +11,34 @@
         <h1 translate>YOUR_PROJECTS</h1>
     </div>
     <div ng-if="vm.hasProjects()" class="row">
-        <div ng-repeat="project in vm.projects track by project.id">
-            <span>{{$index + 1}}. {{ project.name }} - {{ project.projectType.name }} - {{ project.country.name }} </span>
+        <div class="project-container" ng-repeat="project in vm.projects track by project.id">
+            <div class="project-list-item" ui-sref="{{ vm.states.PROJECT }}({ projectId: project.id })">
+                <span class="header">{{ project.name }}</span>
+                <span class="header-annotation">by {{ project.owner.username }}</span>
+                <div class="description">
+                    <p>{{ project.description | limitTo: 250}}...</p>
+                </div>
+                <ul class="list-inline">
+                    <li>
+                        <div class="info" style="left: 5%;">
+                            <span class="value">{{ (project.pledged / project.fundingGoal)| number:2 }}%</span>
+                            <span class="annotation">funded</span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="info" style="left: 38%">
+                            <span class="value">{{ project.pledged }}</span>
+                            <span class="annotation">pledged</span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="info" style="left: 71%">
+                            <span class="value">{{ project.daysToGo }}</span>
+                            <span class="annotation">days to go</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
 </div>

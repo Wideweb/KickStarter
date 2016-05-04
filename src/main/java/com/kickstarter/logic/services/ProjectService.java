@@ -162,8 +162,7 @@ public class ProjectService implements IProjectService {
         Session session = sessionFactory.openSession();
         return (List<Project>) session
                 .createCriteria(Project.class)
-                .add(Restrictions.eq("approved", true))
-                .add(Restrictions.lt("endDate", new Date()))
+                .add(Restrictions.isNull("approved"))
                 .list();
     }
 
@@ -172,7 +171,8 @@ public class ProjectService implements IProjectService {
         Session session = sessionFactory.openSession();
         return (List<Project>) session
                 .createCriteria(Project.class)
-                .add(Restrictions.isNull("approved"))
+                .add(Restrictions.eq("approved", true))
+                .add(Restrictions.lt("endDate", new Date()))
                 .list();
     }
 

@@ -41,13 +41,15 @@ public class ProvingProjectsStatisticExcelBuilder extends AbstractExcelView {
 
         CellStyle successStyle = workbook.createCellStyle();
         Font successFont = workbook.createFont();
-        successStyle.setFillBackgroundColor(HSSFColor.GREEN.index);
+        successStyle.setFillForegroundColor(HSSFColor.GREEN.index);
+        successStyle.setFillPattern(CellStyle.SOLID_FOREGROUND);
         successFont.setColor(HSSFColor.WHITE.index);
         successStyle.setFont(successFont);
 
         CellStyle failStyle = workbook.createCellStyle();
         Font failFont = workbook.createFont();
-        failStyle.setFillBackgroundColor(HSSFColor.RED.index);
+        failStyle.setFillForegroundColor(HSSFColor.RED.index);
+        failStyle.setFillPattern(CellStyle.SOLID_FOREGROUND);
         failFont.setColor(HSSFColor.WHITE.index);
         failStyle.setFont(successFont);
 
