@@ -89,7 +89,7 @@ INSERT INTO Countries (Id, Name) VALUES (6, 'Ukraine');
 SELECT  setval('countries_Id_seq', (SELECT MAX(Id) FROM Countries));
 
 
-CREATE TABLE Project
+CREATE TABLE Projects
 (
   Id SERIAL,
   Name character varying(45) NOT NULL,
@@ -105,5 +105,28 @@ CREATE TABLE Project
 WITH (
 OIDS=FALSE
 );
-ALTER TABLE Project
+ALTER TABLE Projects
+OWNER TO postgres;
+
+
+CREATE TABLE Donations
+(
+  Id SERIAL,
+  Amount integer NOT NULL,
+  Project integer NOT NULL,
+  Reward integer NOT NULL,
+  User integer NOT NULL,
+  CONSTRAINT PK_Dinations PRIMARY KEY (Id),
+  CONSTRAINT FK_DonationUser FOREIGN KEY (User)
+  REFERENCES AppUsers (Id) MATCH SIMPLE,
+  CONSTRAINT FK_DonationRewards FOREIGN KEY (Reward)
+  REFERENCES Rewards (Id) MATCH SIMPLE,
+  CONSTRAINT FK_DonationProject FOREIGN KEY (Project)
+  REFERENCES Projects (Id) MATCH SIMPLE
+  ON UPDATE NO ACTION ON DELETE NO ACTION
+)
+WITH (
+OIDS=FALSE
+);
+ALTER TABLE Donations
 OWNER TO postgres;

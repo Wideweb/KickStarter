@@ -1,32 +1,61 @@
 <div class="container absolute-centered">
     <div class="row row-centered">
-        <div class="col-md-8 col-md-offset-2">
-                <h2 class="trip-request-header" translate>FILL_REGISTRATION_FORM</h2>
-                <div class="server-errors">
-                    <span class="error-text">{{ vm.serverError }}</span>
-                </div>
+        <div class="col-sm-6 col-sm-offset-3 rounded-content-frame rounded-content-frame--white">
+            <div class="server-errors">
+                <span class="error-text">{{ vm.serverError }}</span>
+            </div>
+            <div class="rounded-content-frame__content current" id="signup">
+                <h2 class="title">
+                    Sign up
+                </h2>
                 <form name="vm.userForm" class="form-horizontal" novalidate role="form">
+                    <fieldset>
+                        <div class="fieldset-errors">
 
-                        <input-wrapper input-reference="vm.userForm.userName" label="Name">
-                            <input ng-model="vm.user.userName" type="text" class="form-control" name="userName"
-                                       required ng-maxlength="50" />
-                        </input-wrapper>
-
-                        <input-wrapper input-reference="vm.userForm.email" label="Email">
-                            <input ng-model="vm.user.email" type="text" class="form-control" name="email"
-                                       required ng-maxlength="50" />
-                        </input-wrapper>
-
-                        <input-wrapper input-reference="vm.userForm.password" label="Password">
-                            <input ng-model="vm.user.password" type="password" class="form-control" name="password"
-                                       required ng-maxlength="50" />
-                        </input-wrapper>
-
-                    <button type="submit" 
-                            class="btn btn-primary hr-centered" 
-                            ng-disabled="vm.isSubmitting" 
-                            ng-click="vm.register(vm.user)" translate>OK</button>
+                        </div>
+                        <ol>
+                            <li class="mb2">
+                                <label for="userName"></label>
+                                <input ng-model="vm.user.userName" input-reference="vm.userForm.userName" type="text" class="form-control input-text full-width js-auto_focus text"
+                                       name="userName" id="userName" required ng-maxlength="50" autofocus="autofocus" placeholder="username"/>
+                            </li>
+                            <li class="mb2" id="form-signup-email">
+                                <label class="offscreen" for="user_email">Email</label>
+                                <input ng-model="vm.user.email" class="form-control input-text full-width email" type="email" name="email"
+                                       id="user_email" input-reference="vm.userForm.email" required ng-maxlength="50" placeholder="email"/>
+                            </li>
+                          <!--  <li class="mb2">
+                                <label class="offscreen" for="user_email_confirm">Confirm-Email</label>
+                                <input ng-model="vm.user.emailConfirm" class="form-control input-text full-width email" type="email" name="email_confirm"
+                                       id="user_email_confirm" input-reference="vm.userForm.emailConfirm" required ng-maxlength="50" placeholder="confirm-email" />
+                            </li>
+                            -->
+                            <li class="mb2">
+                                <label class="offscreen" for="user_password">Password</label>
+                                    <input input-reference="vm.userForm.password" ng-model="vm.user.password" type="password" id="user_password"
+                                           class="form-control input-text full-width password" name="password" required ng-maxlength="50" placeholder="password"/>
+                            </li>
+                        <!--    <li class="mb2">
+                                <label class="offscreen" for="user_password_confirm">Confirm-Password</label>
+                                <input input-reference="vm.userForm.passwordConfirm" ng-model="vm.user.passwordConfirm" type="password" id="user_password_confirm"
+                                       class="form-control input-text full-width password" name="password_confirm" required ng-maxlength="50" placeholder="confirm-password"/>
+                            </li>
+                            -->
+                            <li class="no-margin">
+                                <br>
+                                <button type="submit"
+                                        class="btn btn--green btn--block"
+                                        ng-disabled="vm.isSubmitting"
+                                        ng-click="vm.register(vm.user)" translate>Sign me up!</button>
+                            </li>
+                        </ol>
+                    </fieldset>
                 </form>
+            </div>
+            <div class="rounded-content-frame__footer">
+                Have an account?
+                <a class="bold" ng-click="vm.goToLogin()" href="javascript:void(0)">Log in</a>
+            </div>
         </div>
     </div>
 </div>

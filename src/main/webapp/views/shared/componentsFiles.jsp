@@ -48,6 +48,9 @@
     <spring:url value="/client/components/angular-translate/angular-translate-url-loader.js" var="angularTranslateUrlLoaderJS" />
     <script src="${angularTranslateUrlLoaderJS}"></script>
 
+    <spring:url value="/client/components/angular-toastr/angular-toastr.tpls.js" var="angularToastrTplsJS" />
+    <script src="${angularToastrTplsJS}"></script>
+
     <spring:url value="/client/components/ui-select/dist/select.js" var="uiSelectJs" />
     <script src="${uiSelectJs}"></script>
 
