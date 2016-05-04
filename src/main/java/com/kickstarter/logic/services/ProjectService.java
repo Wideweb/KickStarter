@@ -34,14 +34,20 @@ public class ProjectService implements IProjectService {
     @Resource(name = "countryRepository")
     private IRepository<Country> countryRepository;
 
-    @Resource(name = "rewardRepository")
-    private IRepository<Reward> rewardRepository;
-
     @Resource(name = "donationRepository")
     private IRepository<Donation> donationRepository;
 
     @Resource(name = "userService")
     private IUserService userService;
+
+    @Resource(name = "rewardRepository")
+    private IRepository<Reward> rewardRepository;
+
+    @Resource(name = "rewardService")
+    private IRewardService rewardService;
+
+    @Resource(name = "donationService")
+    private IDonationService donationService;
 
     public Integer save(ProjectModel projectModel, String userName){
         Project project = new Project();
@@ -92,15 +98,8 @@ public class ProjectService implements IProjectService {
         projectModel.setFundingGoal(project.getFundingGoal());
         projectModel.setFundingDuration(project.getFundingDuration());
 
-        for(Integer i = 0; i < project.getRewards().size(); i++){
-            Reward reward = project.getRewards().get(i);
-            RewardModel rewardModel = new RewardModel();
-            rewardModel.setId(reward.getId());
-            rewardModel.setAmount(reward.getAmount());
-            rewardModel.setDescription(reward.getDescription());
-            rewardModel.setProjectId(project.getId());
-            projectModel.getRewards().add(rewardModel);
-        }
+        projectModel.setRewards(rewardService.getRewardsByProjectId(projectId));
+        projectModel.setDonations(donationService.getDonationsByProjectId(projectId));
 
         return projectModel;
     }
