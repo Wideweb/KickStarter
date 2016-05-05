@@ -31,11 +31,12 @@
                 </div>
 
                 <div class="input-group hidden-sm hidden-xs">
-                    <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                    <span class="input-group-addon" ng-click="vm.findProjects()"><i class="fa fa-search"></i></span>
                     <input type="text" 
                            class="form-control" 
                            placeholder="Search Projects" 
-                           aria-describedby="sizing-addon2">
+                           aria-describedby="sizing-addon2"
+                            ng-model="vm.projectSearchString">
                 </div>
 
                 <div ng-hide="vm.isAuthorized()" class="btn-group navbar-right">
@@ -59,11 +60,12 @@
         <div class="row hidden-lg hidden-md">
             <form class="form-inline">
                 <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                    <span class="input-group-addon" ng-click="vm.findProjects()"><i class="fa fa-search"></i></span>
                     <input type="text" 
                            class="form-control" 
                            placeholder="Search Projects" 
-                           aria-describedby="sizing-addon2">
+                           aria-describedby="sizing-addon2"
+                           ng-model="vm.projectSearchString">
                 </div>
             </form>
         </div>

@@ -16,6 +16,7 @@ import org.hibernate.transform.AliasToBeanResultTransformer;
 
 import javax.annotation.Resource;
 import java.sql.Time;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -115,6 +116,16 @@ public class ProjectService implements IProjectService {
             session.getTransaction().rollback();
             throw e;
         }
+    }
+
+    @Override
+    public List<ProjectModel> find(String projectString){
+        List<ProjectModel> projects = getAll();
+        List<ProjectModel> result = new ArrayList<>();
+        for (int i = 0; i < projects.size(); i++)
+            if(projects.get(i).getName().contains(projectString))
+                result.add(projects.get(i));
+        return result;
     }
 
     public List<ProjectModel> getUserProjects(String userName){

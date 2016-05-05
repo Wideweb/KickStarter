@@ -10,6 +10,7 @@
         UNAUTHORIZED: "401",
         CREATE_PROJECT: "create-project",
         USER_PROJECT_LIST: "user-project-list",
+        FOUNDED_PROJECTS: "founded_projects",
         DONATE_TO_PROJECT: "donate-to-project",
         PROJECT: "project",
         DISCOVER: "discover",

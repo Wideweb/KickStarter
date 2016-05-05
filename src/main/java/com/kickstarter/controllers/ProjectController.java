@@ -32,6 +32,13 @@ public class ProjectController {
         return CustomJsonResult.TryGetJsonResult(() -> projectService.get(projectId));
     }
 
+    @RequestMapping(value = "find", method = RequestMethod.GET)
+    public
+    @ResponseBody
+    CustomJsonResult Find(@RequestParam String projectString, HttpServletRequest request) {
+        return CustomJsonResult.TryGetJsonResult(() -> projectService.find(projectString));
+    }
+
     @RequestMapping(value = "approve/{projectId}", method = RequestMethod.GET)
     public
     @ResponseBody
