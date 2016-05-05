@@ -11,7 +11,9 @@ import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+import com.kickstarter.logic.domain.Reward;
 import com.kickstarter.models.ProjectModel;
+import com.kickstarter.models.RewardModel;
 
 
 public class ProjectPDFBuilder extends AbstractITextPdfView {
@@ -66,8 +68,10 @@ public class ProjectPDFBuilder extends AbstractITextPdfView {
         cell.setPhrase(new Phrase("Price", font));
         table.addCell(cell);
 
-            table.addCell("Description");
-            table.addCell("Price");
+        for (RewardModel reward: project.getRewards()){
+            table.addCell(reward.getDescription());
+            table.addCell(reward.getAmount().toString() + "$");
+        }
 
         doc.add(table);
 

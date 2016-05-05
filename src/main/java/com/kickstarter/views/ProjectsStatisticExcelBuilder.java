@@ -89,10 +89,15 @@ public class ProjectsStatisticExcelBuilder extends AbstractExcelView {
 
             row.createCell(3).setCellValue(project.getFundingGoal() + "$");
 
-            row.createCell(4).setCellValue("Earned");
+            row.createCell(4).setCellValue(project.getPledged() + "$");
 
-            row.createCell(5).setCellValue("Result");
-            row.getCell(5).setCellStyle(style);
+            if(project.getPledged() > project.getFundingGoal()){
+                row.createCell(5).setCellValue("YES");
+                row.getCell(5).setCellStyle(successStyle);
+            }else{
+                row.createCell(5).setCellValue("NO");
+                row.getCell(5).setCellStyle(failStyle);
+            }
 
             rowCount++;
         }
