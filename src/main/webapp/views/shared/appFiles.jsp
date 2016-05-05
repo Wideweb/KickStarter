@@ -60,6 +60,9 @@
     <spring:url value="/client/application/js/controllers/DiscoverController.js" var="appDiscoverControllerJs" />
     <script src="${appDiscoverControllerJs}"></script>
 
+    <spring:url value="/client/application/js/controllers/FoundedProjectsController.js" var="appFoundedProjectsControllerJs" />
+    <script src="${appFoundedProjectsControllerJs}"></script>
+
     <spring:url value="/client/application/js/controllers/ProjectsByCategoryController.js" var="appProjectsByCategoryControllerJs" />
     <script src="${appProjectsByCategoryControllerJs}"></script>
 
