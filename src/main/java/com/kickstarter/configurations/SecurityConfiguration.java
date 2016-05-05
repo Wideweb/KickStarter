@@ -29,7 +29,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers(HttpMethod.POST, "account/register", "account/login").permitAll()
                 .antMatchers(HttpMethod.GET, "document/downloadProjectPDF/{projectId}").permitAll()
-                .antMatchers(HttpMethod.GET, "project/getAll", "/", "/home", "lookups/countries", "lookups/projectTypes").permitAll()
+                .antMatchers(HttpMethod.GET, "project/getAll", "/", "/home", "lookups/countries", "lookups/projectTypes", "project/find").permitAll()
                 .antMatchers(HttpMethod.POST, "project/donate", "project/save", "account/logoff").hasAnyRole(Role.AdminRoleName, Role.UserRoleName)
                 .antMatchers(HttpMethod.GET, "project/getUserProjects", "project/get").hasAnyRole(Role.AdminRoleName, Role.UserRoleName)
                 .antMatchers("/admin/**").hasRole(Role.AdminRoleName)

@@ -57,6 +57,15 @@
                             authenticate: true
                         }
                     })
+                    .state(appStates.FOUNDED_PROJECTS, {
+                        url: "/founded_projects/:searchString",
+                        templateUrl: appSettings.pagesFolderPath + "main.html",
+                        controller: "FoundedProjectsController",
+                        controllerAs: "vm",
+                        data:{
+                            authenticate: true
+                        }
+                    })
                     .state(appStates.PROJECT, {
                         url: "/project/:projectId",
                         templateUrl: appSettings.pagesFolderPath + "project.html",

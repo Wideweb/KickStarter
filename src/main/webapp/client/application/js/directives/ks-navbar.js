@@ -25,7 +25,10 @@
         vm.goToCreateProject = goToCreateProject;
         vm.isAdmin = isAdmin;
         vm.goToUnapprovedProjects = goToUnapprovedProjects;
+        vm.findProjects = findProjects;
+        vm.goToFoundedProjects = goToCreateProject;
         vm.user = null;
+        vm.projectSearchString = "";
         vm.appRoles = appUser.ROLES;
 
     	function goToHome(){
@@ -52,6 +55,10 @@
             $state.go(appStates.UNAPPROVED_PROJECTS);
         }
 
+        function goToFoundedProjects() {
+            $state.go(appStates.FOUNDED_PROJECTS, { searchString: vm.projectSearchString});
+        }
+        
         function signOut(){
             authService.logoff();
             goToHome();
@@ -64,6 +71,10 @@
 
         function isAdmin(){
             return authService.isAdmin();
+        }
+        
+        function findProjects() {
+            goToFoundedProjects();
         }
     }
 })();

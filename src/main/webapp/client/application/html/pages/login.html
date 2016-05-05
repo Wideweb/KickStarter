@@ -12,7 +12,7 @@
                     <div class="mb2">
                         <form name="vm.userForm" class="form-horizontal" novalidate role="form">
                             <fieldset class="mb1">
-                                <ol>
+                                <ul class="fields-list">
                                     <li class="mb2">
                                         <label class="offscreen" for="username">Username</label>
                                         <input ng-model="vm.user.username" type="text" class="form-control input-text full-width js-auto_focus email"
@@ -27,10 +27,10 @@
                                         </div>
                                     </li>
                                     <li class="clearfix">
-                                        <input class="btn btn--green btn--block submit" ng-disabled="vm.isSubmitting"
-                                               ng-click="vm.login(vm.user)" translate name="commit" value="Log me in!" type="submit">
+                                        <button class="btn btn-success btn--block submit" ng-disabled="vm.isSubmitting"
+                                               ng-click="vm.login(vm.user)" translate name="commit">Log me in!</button>
                                     </li>
-                                </ol>
+                                </ul>
                             </fieldset>
                         </form>
 
