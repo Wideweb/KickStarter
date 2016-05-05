@@ -15,6 +15,8 @@ public interface IProjectService {
     List<ProjectModel> getActive();
     List<ProjectModel> getProjectsForApproving();
     List<ProjectModel> getFinished();
+    List<ProjectModel> find(String projectString);
+
     void approveProject(Integer projectId);
     void rejectProject(Integer projectId);
 }

@@ -13,6 +13,7 @@
         ACCOUNT_LOGIN: serverPath + 'account/login',
         ACCOUNT_LOGOFF: serverPath + 'account/logoff',
         USER_PROJECTS:  serverPath + 'project/getUserProjects',
+        FIND_PROJECT: serverPath + 'project/find',
         DONATE_TO_PROJECT:  serverPath + 'project/donate',
         DOWNLOAD_PROJECT_PDF: serverPath + 'document/downloadProjectPDF/',
         DOWNLOAD_PROJECTS_STATISTIC: serverPath + 'document/downloadProjectsStatistic',
