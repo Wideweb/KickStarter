@@ -54,5 +54,13 @@
         $scope.isAdmin = function() {
             return authService.isAdmin();
         }
+
+        $scope.isProjectApproved = function(){
+            return $scope.project && $scope.project.approved === true;
+        }
+
+        $scope.isProjectRejected = function(){
+            return $scope.project && $scope.project.approved === false;
+        }
     }
 })();
