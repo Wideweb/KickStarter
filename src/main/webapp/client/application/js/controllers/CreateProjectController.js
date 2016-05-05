@@ -17,6 +17,7 @@
         vm.supportedCountries = {};
         vm.save = save;
         vm.addReward = addReward;
+        vm.removeRewardAt = removeRewardAt;
 
         activate();
 
@@ -50,15 +51,19 @@
             vm.project.rewards.push({ amount: '', description: '' });
         }
 
-        function isProjectFormValid(){
-        if(vm.projectForm.$invalid){
-            angular.forEach(vm.projectForm.$error.required, function(field){
-                field.$setTouched();
-            });
-            return false;
+        function removeRewardAt(index) {
+            vm.project.rewards.splice(index, 1);
         }
-        return true;
-    }
+
+        function isProjectFormValid(){
+            if(vm.projectForm.$invalid){
+                angular.forEach(vm.projectForm.$error.required, function(field){
+                    field.$setTouched();
+                });
+                return false;
+            }
+            return true;
+        }
 
         function onSaveSuccess(response){
             $state.go(appStates.HOME);
