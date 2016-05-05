@@ -13,6 +13,7 @@
         vm.searchString = $state.params.searchString;
         vm.projects = {};
         vm.serverError = '';
+        vm.states = appStates;
         vm.hasProjects = hasProjects;
 
         activate();

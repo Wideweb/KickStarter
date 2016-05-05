@@ -59,7 +59,7 @@
                     })
                     .state(appStates.FOUNDED_PROJECTS, {
                         url: "/founded_projects/:searchString",
-                        templateUrl: appSettings.pagesFolderPath + "founded_projects.html",
+                        templateUrl: appSettings.pagesFolderPath + "main.html",
                         controller: "FoundedProjectsController",
                         controllerAs: "vm",
                         data:{
