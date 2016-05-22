@@ -2,15 +2,15 @@ package com.kickstarter.models;
 
 
 public class UserLoginModel {
-    private String email;
+    private String userName;
     private String password;
 
-    public String getEmail() {
-        return email;
+    public String getUsername() {
+        return userName;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setUsername(String userName) {
+        this.userName = userName;
     }
 
     public String getPassword() {

@@ -7,11 +7,17 @@
     ]);
 
     angular.module("vendor", [
+        "ngCookies",
+        "ngAnimate",
         "ui.router",
         "ui.bootstrap",
+        "ui.bootstrap.tpls",
         "ngRoute",
         "ngMessages",
-        "ngSanitize"
+        "ngSanitize",
+        "ui.select",
+        "pascalprecht.translate",
+        "toastr"
     ]);
 
     angular.module("app.constants", []);

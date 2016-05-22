@@ -3,6 +3,7 @@ package com.kickstarter.configurations;
 import com.kickstarter.logic.domain.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -26,11 +27,16 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/", "/home").permitAll()
+                .antMatchers(HttpMethod.POST, "account/register", "account/login").permitAll()
+                .antMatchers(HttpMethod.GET, "document/downloadProjectPDF/{projectId}").permitAll()
+                .antMatchers(HttpMethod.GET, "project/getAll", "/", "/home", "lookups/countries", "lookups/projectTypes", "project/find").permitAll()
+                .antMatchers(HttpMethod.POST, "project/donate", "project/save", "account/logoff").hasAnyRole(Role.AdminRoleName, Role.UserRoleName)
+                .antMatchers(HttpMethod.GET, "project/getUserProjects", "project/get").hasAnyRole(Role.AdminRoleName, Role.UserRoleName)
                 .antMatchers("/admin/**").hasRole(Role.AdminRoleName)
-                .and().formLogin().loginPage("/login")
-                .usernameParameter("username").passwordParameter("password")
-                .and().csrf()
-                .and().exceptionHandling().accessDeniedPage("/Access_Denied");
+                //.antMatchers("/project/getUnapproved").hasRole(Role.AdminRoleName)
+                //.antMatchers("/project/approve").hasRole(Role.AdminRoleName)
+                //.antMatchers("/project/reject").hasRole(Role.AdminRoleName)
+                .and().csrf().disable();
+                //.and().exceptionHandling().accessDeniedPage("/Access_Denied");
     }
 }

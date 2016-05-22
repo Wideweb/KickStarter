@@ -3,6 +3,6 @@ package com.kickstarter.logic.services.exceptions;
 public class UserLoginException extends Exception {
 
     public UserLoginException(){
-        super();
+        super("Wrong user name or password");
     }
 }

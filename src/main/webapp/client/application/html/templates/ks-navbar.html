@@ -1,0 +1,73 @@
+<nav class="navbar navbar-top">
+
+    <div class="container-fluid">
+
+        <div class="row row-bordered navbar-row hidden-lg hidden-md">
+            <div class="navbar-header">
+                <a class="navbar-brand" ng-click="vm.goToHome()">
+                    <img src="/client/application/content/images/logo.png" class="brand-img"></img>
+                </a>
+            </div>
+        </div>
+
+        <div class="row row-bordered">
+            <div class="navbar-header hidden-sm hidden-xs">
+                <a class="navbar-brand" ng-click="vm.goToHome()">
+                    <img src="/client/application/content/images/logo.png" class="brand-img"></img>
+                </a>
+            </div>
+
+            <form class="form-inline">
+
+                <div class="btn-group" role="group" aria-label="...">
+                    <button type="button" class="btn btn-default" ng-click="vm.discover()" translate>DISCOVER</button>
+                    <button ng-click="vm.goToCreateProject()" 
+                            type="button" 
+                            class="btn btn-default" 
+                            translate>START_PROJECT</button>
+                    <button type="button" 
+                            class="btn btn-default hidden-md hidden-sm hidden-xs" 
+                            translate>ABOUT_US</button>
+                </div>
+
+                <div class="input-group hidden-sm hidden-xs">
+                    <span class="input-group-addon" ng-click="vm.findProjects()"><i class="fa fa-search"></i></span>
+                    <input type="text" 
+                           class="form-control" 
+                           placeholder="Search Projects" 
+                           aria-describedby="sizing-addon2"
+                            ng-model="vm.projectSearchString">
+                </div>
+
+                <div ng-hide="vm.isAuthorized()" class="btn-group navbar-right">
+                    <a class="btn btn-primary" ng-click="vm.goToLogin()" translate>LOG_IN</a>
+                    <a class="btn btn-primary" ng-click="vm.goToRegister()" translate>SIGN_UP</a>
+                </div>
+
+                <div ng-show="vm.isAuthorized()" class="btn-group navbar-right">
+                    <a class="btn btn-primary dropdown-toggle"
+                       data-toggle="dropdown" aria-haspopup="true"
+                       aria-expanded="false" translate>Account</a>
+                    <ul class="dropdown-menu">
+                        <li><a ng-show="vm.isAdmin()" style="cursor: pointer;"
+                               ng-click="vm.goToUnapprovedProjects()">Unapproved Projects</a></li>
+                        <li><a style="cursor: pointer;" ng-click="vm.signOut()">Log out</a></li>
+                    </ul>
+                </div>
+            </form>
+        </div>
+
+        <div class="row hidden-lg hidden-md">
+            <form class="form-inline">
+                <div class="input-group">
+                    <span class="input-group-addon" ng-click="vm.findProjects()"><i class="fa fa-search"></i></span>
+                    <input type="text" 
+                           class="form-control" 
+                           placeholder="Search Projects" 
+                           aria-describedby="sizing-addon2"
+                           ng-model="vm.projectSearchString">
+                </div>
+            </form>
+        </div>
+    </div>
+</nav>

@@ -1,77 +1,74 @@
-angular.module('app').factory("authService",
-    ["$http", "$q", "$window", "appEvents", "$rootScope", authService]);
+(function () {
+    "use strict";
 
-function authService($http, $q, $window, appEvents, $rootScope) {
-    var userInfo = null;
+    angular
+        .module('app')
+        .factory("authService", ["$http", "$q", "$window", "appEvents", 
+            "$rootScope", "urls", authService]);
 
-    function init() {
-        if ($window.sessionStorage["userInfo"]) {
-            userInfo = JSON.parse($window.sessionStorage["userInfo"]);
-            if(userInfo){
-                $rootScope.$emit(appEvents.USER_INFO_CHANGED, userInfo);
+    function authService($http, $q, $window, appEvents, $rootScope, urls) {
+        var userInfo = null;
+
+        function init() {
+            if ($window.sessionStorage["userInfo"]) {
+                try{
+                    userInfo = JSON.parse($window.sessionStorage["userInfo"]);
+                    if(userInfo){
+                        $rootScope.$emit(appEvents.USER_INFO_CHANGED, userInfo);
+                    }
+                }catch(error){
+                    $window.sessionStorage["userInfo"] = null;
+                }
             }
         }
-    }
 
-    init();
+        init();
 
-    function UpdateUserInfo(data){
-        userInfo = data;
-        $window.sessionStorage["userInfo"] = JSON.stringify(userInfo);
-        $rootScope.$emit(appEvents.USER_INFO_CHANGED, userInfo);
-    }
-
-    return {
-        register: function(registerModel) {
-            var deferred = $q.defer();
-
-            $http.post("/Account/Register", registerModel).then(function(response){
-                if (response.data.success) {
-                    UpdateUserInfo(response.data.data);
-                    deferred.resolve(userInfo);
-                }else{
-                    deferred.reject({statusText: response.data.errorMessage});
-                }
-            }, function(error){
-                deferred.reject(error);
-            });
-
-            return deferred.promise;
-        },
-        login: function(loginModel) {
-            var deferred = $q.defer();
-
-            $http.post("/Account/Login", loginModel).then(function(response){
-                if (response.data.success) {
-                    UpdateUserInfo(response.data.data);
-                    deferred.resolve(response.data.data);
-                }else{
-                    deferred.reject({statusText: response.data.errorMessage});
-                }
-            }, function(error){
-                deferred.reject(error);
-            });
-
-            return deferred.promise;
-        },
-        getUserInfo: function() {
-            return userInfo;
-        },
-        logoff: function () {
-            var deferred = $q.defer();
-
-            $http.post("/Account/LogOff").then(function(result) {
-                $window.sessionStorage["userInfo"] = null;
-                userInfo = null;
-                deferred.resolve(result);
-            }, function(error) {
-                deferred.reject(error);
-            });
-
-            return deferred.promise;
-        },
-        isAuthenticated: function(){
-            return userInfo !== null && userInfo !== undefined;
+        function UpdateUserInfo(data){
+            userInfo = data;
+            $window.sessionStorage["userInfo"] = JSON.stringify(userInfo);
+            $rootScope.$emit(appEvents.USER_INFO_CHANGED, userInfo);
         }
-    };
-}
+
+        function onUserInfoReceived(response){
+            UpdateUserInfo(response.data);
+        }
+
+        function onLogOffSuccess(){
+            $window.sessionStorage["userInfo"] = null;
+            userInfo = null;
+        }
+
+        return {
+            register: function(registerModel) {
+                return $http
+                    .post(urls.ACCOUNT_REGISTER, registerModel)
+                    .then(onUserInfoReceived);
+            },
+            login: function(loginModel) {
+                return $http
+                    .post(urls.ACCOUNT_LOGIN, loginModel)
+                    .then(onUserInfoReceived);
+            },
+            getUserInfo: function() {
+                return userInfo;
+            },
+            logoff: function () {
+                return $http
+                    .post(urls.ACCOUNT_LOGOFF)
+                    .then(onLogOffSuccess);
+            },
+            isAuthenticated: function(){
+                return userInfo !== null && userInfo !== undefined;
+            },
+            isAdmin: function() {
+                if (userInfo !== null && userInfo !== undefined
+                    && userInfo.role.roleName === 'Administrator') {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        };
+    }
+})();

@@ -1,0 +1,12 @@
+<div class="header">
+    <h1>Explore an incredible creative universe</h1>
+    <h4>{{ categories.length }} diverse categories. Thousands of amazing projects.</h4>
+</div>
+<div class="container">
+    <div class="categories">
+        <div class="category" ng-repeat="category in categories" ui-sref="{{ states.PROJECTS_BY_CATEGORY }}({ categoryId: category.id })">
+            <h4 class="title">{{ category.name }}</h4>
+            <h4 class="projects">{{ category.count }} live projects</h4>
+        </div>
+    </div>
+</div>

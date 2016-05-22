@@ -1,0 +1,136 @@
+<div class="container create-project-container">
+    <div class="row row-centered">
+        <h1 class="create-project-header" translate>WHAT_ARE_YOU_GOING_TO_CREATE</h1>
+    </div>
+    <div class="row row-centered">
+        <div class="server-errors">
+            <span class="error-text">{{ vm.serverError }}</span>
+        </div>
+        <form name="vm.projectForm" class="form-horizontal col-md-8 col-md-offset-2  col-sm-12 col-xs-12">
+            <div class="form-group"
+                 ng-class="{ 'has-error': vm.projectForm.projectType.$touched
+                    && vm.projectForm.projectType.$invalid }">
+                <div class="flex-container">
+                    <label translate>I_WANT_TO_START_A</label>
+                    <label>
+                        <ks-autocomplete
+                                id="projectType"
+                                name="projectType"
+                                required="true"
+                                selected-item-id="vm.project.projectTypeId"
+                                item-source-url="{{ vm.urls.PROJECT_TYPE_LOOKUPS }}">
+                        </ks-autocomplete>
+                    </label>
+                    <label translate>PROJECT_CALLED</label>
+                </div>
+            </div>
+
+            <div class="form-group"
+                 ng-class="{ 'has-error': vm.projectForm.name.$touched && vm.projectForm.name.$invalid }">
+                <div class="flex-container">
+                    <div class="col-sm-10 col-xs-11 text-box-container">
+                        <input placeholder="title..."
+                               id="name"
+                               name="name"
+                               required
+                               class="form-control"
+                               ng-model="vm.project.name"/>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group"
+                 ng-class="{ 'has-error': vm.projectForm.description.$touched && vm.projectForm.description.$invalid }">
+                <div class="flex-container">
+                    <label for="description">Description:</label>
+                    <textarea class="form-control"
+                              style="height: auto;"
+                              rows="5"
+                              id="description"
+                              name="description"
+                              required
+                              ng-model="vm.project.description"
+                    ></textarea>
+                </div>
+            </div>
+            <div class="form-inline">
+                <div class="form-group"
+                     ng-class="{ 'has-error': vm.projectForm.fundingDuration.$touched && vm.projectForm.fundingDuration.$invalid }">
+                    <label for="fundingDuration">Funding Duration:</label>
+                    <input placeholder="Days"
+                           id="fundingDuration"
+                           name="fundingDuration"
+                           required
+                           class="form-control"
+                           ng-model="vm.project.fundingDuration"/>
+                </div>
+                <div class="form-group"
+                     ng-class="{ 'has-error': vm.projectForm.fundingGoal.$touched && vm.projectForm.fundingGoal.$invalid }">
+                    <label for="fundingDuration">Funding Goal:</label>
+                    <div class="input-group">
+                        <input placeholder=""
+                               id="fundingGoal"
+                               name="fundingGoal"
+                               required
+                               class="form-control"
+                               ng-model="vm.project.fundingGoal"/>
+                        <div class="input-group-addon">$</div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row reward-row" ng-repeat="reward in vm.project.rewards">
+                    <div class="reward-container">
+                        <div class="col-sm-8 col-md-offset-2">
+                          <div class="text-box-container">
+                              <input placeholder="amount..."
+                                     id="reward-amount-{{ $index + 1 }}"
+                                     name="reward_amount_{{ $index + 1 }}"
+                                     class="form-control"
+                                     ng-model="reward.amount"/>
+                          </div>
+                          <div class="text-box-container">
+                              <input placeholder="description..."
+                                     id="reward-description-{{ $index + 1 }}"
+                                     name="reward_description_{{ $index + 1 }}"
+                                     class="form-control"
+                                     ng-model="reward.description"/>
+                          </div>
+                        </div>
+                        <div class="icon-container col-sm-1" ng-click="vm.removeRewardAt($index)">
+                          <i class="fa fa-times" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                  </div>
+                  <div class="row row-centered">
+                    <input type="button" class="btn btn-info col-sm-4 col-sm-offset-4" ng-click="vm.addReward()" value="Add reward">
+                  </div>
+            </div>
+            <div class="form-group"
+                 ng-class="{ 'has-error': vm.projectForm.country.$touched && vm.projectForm.country.$invalid }">
+                <div class="flex-container">
+                    <div class="col-sm-4 col-sm-offset-1 col-xs-5">
+                        <ks-autocomplete
+                                id="country"
+                                name="country"
+                                required="true"
+                                selected-item-id="vm.project.countryId"
+                                item-source-url="{{ vm.urls.COUNTRY_LOOKUPS }}">
+                        </ks-autocomplete>
+                        <p class="creation-location-info">
+                        * Project creation is currently open to creators in
+                        <span ng-repeat="country in vm.supportedCountries">{{ country.text }}&nbsp</span>
+                        </p>
+                    </div>
+                    <div class="col-sm-7 col-xs-6">
+                        <button class="btn-start col-sm-offset-5 col-xs-offset-6"
+                                type="Submit"
+                                ng-disabled="vm.isSubmitting"
+                                ng-click="vm.save()"
+                                translate>START
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

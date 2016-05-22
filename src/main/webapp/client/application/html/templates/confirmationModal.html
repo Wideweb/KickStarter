@@ -1,0 +1,16 @@
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal"
+            ng-click="vm.cancel()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    <h3 class="title" translate>CONFIRM</h3>
+</div>
+<div class="modal-body">
+    <h4 class="text-center" translate translate-values="vm.translateValues">
+        {{ vm.translateKey }}
+    </h4>
+</div>
+<div class="modal-footer">
+    <a href="" class="btn btn-cancel" translate ng-click="vm.cancel()">CANCEL</a>
+    <button class="btn btn-green" type="submit" ng-click="vm.ok()" translate>OK</button>
+</div>

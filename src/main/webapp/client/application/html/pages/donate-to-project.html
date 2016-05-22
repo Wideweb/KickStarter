@@ -1,0 +1,125 @@
+<div class="container donate-to-project-container">
+    <div class="row project-header-wrapper row-centered">
+        <div class="project-header">
+            <h1>{{ vm.project.name }}</h1>
+            <h5>by {{ vm.project.owner }}</h5>
+        </div>
+    </div>
+
+    <div class="container rewars-container col-sm-8">
+        <div class="row rewards-header">
+            <span>Let's choose your reward!</span>
+        </div>
+
+        <div>
+            <div class="row rewards-row">
+                 <div class="container reward-container grow col-sm-12" 
+                      ng-class="{'choosen-reward' : vm.isSimpleDonateActivated()}"
+                      ng-click="vm.activateSimpleDonate()">
+                    <div class="col-sm-1 col-xs-1">
+                        <input type="radio" name="reward" ng-model="vm.simpleDonateActivated" ng-value="true">
+                    </div>
+                    <div class="col-sm-11 col-xs-11">
+                        <div class="reward-description">
+                            <span class="text-bold">No thanks,</span> <span>I just want to help the project.</span>
+                        </div>
+                    </div>
+                    <div class="row divider-row">
+                        <div class="dashed-divider"></div>
+                    </div>
+                    <div ng-if="vm.isSimpleDonateActivated()" class="row form-row">
+                        <ng-form role="form" name="donationForm" novalidate>
+                            <div class="form-group">
+                                <label for="amount" class="control-label col-sm-12" translate>PLEDGE_AMOUNT</label>
+                                <div ng-class="{'has-error': vm.form.amount.$invalid && vm.form.amount.$touched }">
+                                    <div class="col-sm-8 col-xs-12">
+                                        <input type="text" class="form-control"
+                                               id="amount" name="amount"
+                                               ng-model="vm.donation.amount"
+                                               ng-min="1"
+                                               required />
+                                    </div>
+                                    <div class="col-sm-4 col-xs-12">
+                                       <button type="submit" 
+                                                class="btn btn-green donate-btn" 
+                                                ng-disabled="vm.isSubmitting" 
+                                                ng-click="vm.donate(donationForm)" translate>CONTINUE</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-form>
+                    </div>
+                 </div>
+            </div>
+
+            <div class="row rewards-row" ng-repeat="reward in vm.rewards track by reward.id">
+                 <div class="container reward-container grow col-sm-12" 
+                      ng-class="{'choosen-reward' : vm.isRewardActivatedAt($index)}"
+                      ng-click="vm.activateRewardAt($index)">
+                    <div class="col-sm-1 col-xs-1">
+                        <input type="radio" name="reward" ng-checked="vm.isRewardActivatedAt($index)">
+                    </div>
+                    <div class="col-sm-11 col-xs-11">
+                        <div class="reward-description">
+                            <div class="text-bold">${{ reward.amount }} or more</div>
+                            <div>{{ reward.description }}</div>
+                        </div>
+                    </div>
+                    <div class="row divider-row">
+                        <div class="dashed-divider"></div>
+                    </div>
+                    <div ng-if="vm.isRewardActivatedAt($index)" class="row form-row">
+                        <ng-form role="form" name="donationForm" novalidate>
+                            <div class="form-group">
+                                <label for="amount" class="control-label col-sm-12" translate>PLEDGE_AMOUNT</label>
+                                <div ng-class="{'has-error': vm.form.amount.$invalid && vm.form.amount.$touched }">
+                                    <div class="col-sm-8 col-xs-12">
+                                        <input type="text" class="form-control"
+                                               id="amount" name="amount"
+                                               ng-model="vm.donation.amount"
+                                               ng-min="reward.amount"
+                                               required />
+                                    </div>
+                                    <div class="col-sm-4 col-xs-12">
+                                       <button type="submit" 
+                                                class="btn btn-green donate-btn" 
+                                                ng-disabled="vm.isSubmitting" 
+                                                ng-click="vm.donate(donationForm)" translate>CONTINUE</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-form>
+                    </div>
+                 </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container odd-container col-sm-4">
+        <div class="container information-note-container col-sm-12">
+            <div class="row information-note-header-row">
+                <div class="col-sm-12">
+                    Kickstarter is not a store.
+                </div>
+            </div>
+            <div class="row information-note-sub-header-row">
+                <div class="col-sm-12">
+                    It's a way to bring creative projects to life.
+                </div>
+            </div>
+            <div class="row information-note-message-row">
+                <div class="col-sm-12">
+                    Kickstarter does not guarantee projects or investigate a creator's ability to complete their project. It is the responsibility of the project creator to complete their project as promised, and the claims of this project are theirs alone.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row actions-row">
+        <div class="actions-container col-sm-12">
+            <button type="submit" 
+                    class="btn btn-green"
+                    ng-click="vm.back()" translate>BACK</button>
+        </div>
+    </div>
+</div>

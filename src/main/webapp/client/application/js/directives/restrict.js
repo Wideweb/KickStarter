@@ -1,32 +1,38 @@
-angular.module('app').directive('restrict', ['authService', 'permissionService', 
-    '$rootScope', 'appEvents', function(authService, permissionService, $rootScope, appEvents){
-    
-    return{
-        priority: 100000,
-        scope: {
-            access: "@"
-        },
-        link:  function(scope, element, attr){
-            var reqiuredRoles = [];
+(function(){
+    "use strict";
 
-            function init(){
-                reqiuredRoles = scope.access.split(",");
-                checkPermissions(reqiuredRoles);
+    angular
+        .module('app')
+        .directive('restrict', ['authService', 'permissionService', '$rootScope', 
+            'appEvents', function(authService, permissionService, $rootScope, appEvents){
+        
+        return{
+            priority: 100000,
+            scope: {
+                access: "@"
+            },
+            link:  function(scope, element, attr){
+                var reqiuredRoles = [];
 
-                $rootScope.$on(appEvents.USER_INFO_CHANGED, function(event, userInfo){
+                function init(){
+                    reqiuredRoles = scope.access.split(",");
                     checkPermissions(reqiuredRoles);
-                });
-            }
 
-            init();
+                    $rootScope.$on(appEvents.USER_INFO_CHANGED, function(event, userInfo){
+                        checkPermissions(reqiuredRoles);
+                    });
+                }
 
-            function checkPermissions(reqiuredRoles){
-                if(permissionService.hasAnyRole(reqiuredRoles)){
-                    element.show();
-                }else{
-                    element.hide();
+                init();
+
+                function checkPermissions(reqiuredRoles){
+                    if(permissionService.hasAnyRole(reqiuredRoles)){
+                        element.show();
+                    }else{
+                        element.hide();
+                    }
                 }
             }
         }
-    }
-}]);
+    }]);
+})();
